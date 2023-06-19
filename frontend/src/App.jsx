@@ -17,9 +17,8 @@ import PagenotFound from "./pages/PagenotFound";
 import BookingsPage from "./pages/BookingsPage";
 import BookingPage from "./pages/ReservationDetailPage";
 
-import MyAccount from "./components/MyAccount";
+import MyAccount from "./pages/ProfilePage";
 import ReservationDetailPage from "./pages/ReservationDetailPage";
-import { GoogleApiWrapper } from "google-maps-react";
 import MyPlaces from "./components/MyPlaces/MyPlaces";
 import ReservationPages from "./pages/ReservationPage";
 
@@ -41,7 +40,12 @@ function App() {
 
   return (
     <CookiesProvider>
-      <ToastContainer theme="dark" autoClose={2000} />
+      <ToastContainer
+        theme="dark"
+        autoClose={2000}
+        // position="bottom-right"
+        hideProgressBar
+      />
       {/* <GoogleApiWrapper /> */}
       <Routes>
         {/* <Route path="/" element={<Layout />}> */}
@@ -65,11 +69,11 @@ function App() {
           <Route path="/bookings" element={<BookingsPage />} />
           <Route path="/profile" element={<MyAccount />} />
           <Route path="/bookings" element={<BookingsPage />} />
+          <Route path="/forgetPassword" element={<BookingsPage />} />
           <Route path="/places/:id" element={<PlacePage />}></Route>
           <Route
             path="/reservation/:id"
-            element={<ReservationDetailPage />}
-          ></Route>
+            element={<ReservationDetailPage />}></Route>
           {/* //////////////////////////////////////////////// */}
           {/* <Route path="/account/myAccount" element={<MyAccount />} />
           <Route path="/account/liked" element={<MyAccount />} />

@@ -13,7 +13,6 @@ export default function BookingWidget({ place }) {
   const [checkOut, setCheckOut] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   const user = useSelector((state) => state.user.user);
@@ -56,7 +55,6 @@ export default function BookingWidget({ place }) {
       result.push(temp);
     }
     return result;
-    // dispatch(bookingActions.selectedDate(result));
   };
 
   const formatDateForCountNights = (date) => {
@@ -96,7 +94,7 @@ export default function BookingWidget({ place }) {
               checkOut,
               numberOfGuests,
               name,
-              phone,
+              phone: user?.phone,
               bookBy: user._id,
               placeID: place._id,
               price,
@@ -110,7 +108,7 @@ export default function BookingWidget({ place }) {
             };
 
             dispatch(bookPlaceAsync(formData));
-            setRedirect(true);
+            navigate("/bookings");
           }
         } catch (error) {
           console.log(error);
@@ -125,6 +123,9 @@ export default function BookingWidget({ place }) {
   };
 
   async function bookThisPlace() {
+    if (!user) {
+      return navigate("/login");
+    }
     //payment
     try {
       const orderUrl = "/checkout";
@@ -137,7 +138,6 @@ export default function BookingWidget({ place }) {
   }
 
   if (redirect) {
-    navigate("/");
   }
 
   return (
@@ -174,13 +174,7 @@ export default function BookingWidget({ place }) {
               onChange={(ev) => setName(ev.target.value)}
             />
             <label>Phone number:</label>
-            <input
-              type="tel"
-              minLength={10}
-              value={phone}
-              required
-              onChange={(ev) => setPhone(ev.target.value)}
-            />
+            <span> {user?.phone}</span>
           </div>
         )}
       </div>

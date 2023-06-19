@@ -1,22 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { userRegisterAsync } from "../store/user";
 import LoadingSpinner from "../utils/LoadingSpinner";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const isLoading = useSelector((state) => state.user.loading);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // if (isLoading) {
-  //   return <LoadingSpinner />;
-  // }
-
-  console.log("isLoad", isLoading);
 
   const onRegisterUser = async (event) => {
     event.preventDefault();
@@ -24,9 +19,11 @@ const RegisterPage = () => {
     dispatch(userRegisterAsync({ name, email, password }));
   };
 
-  if (user) {
-    return <Navigate to={"/"} />;
-  }
+  useEffect(() => {
+    if (user) {
+      return navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="mt-36 grow flex items-center justify-around">

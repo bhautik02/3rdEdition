@@ -29,8 +29,8 @@ const signupUser = CatchAsync(async (req, res, next) => {
     subject: "Thank you for Signing Up",
   });
 
-  // sendCookie(newUser, 201, res);
-  res.status(200).json("jkdnjkdn");
+  sendCookie(newUser, 201, res);
+  // res.status(200).json("jkdnjkdn");
 });
 
 const loginUser = CatchAsync(async (req, res, next) => {

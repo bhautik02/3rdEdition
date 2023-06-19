@@ -13,7 +13,6 @@ export const userRegisterAsync = createAsyncThunk(
       });
       toast.success("user created");
       const user = response.data.user;
-      console.log("vhbjnkm", user);
       return user;
     } catch (error) {
       return toast.error(error.response.data.message);
@@ -26,9 +25,7 @@ export const fetchUserAsync = createAsyncThunk("user/fetchUser", async () => {
     const response = await axios.get(`users/profile`, {
       withCredentials: true,
     });
-
     const user = response.data.user;
-
     return user;
   } catch (error) {
     toast.error(error.response.data.message);
@@ -59,6 +56,7 @@ export const userUpdateAsync = createAsyncThunk(
   "user/userUpdate",
   async ({ userId, address, gender, aboutMe, phone, profile }) => {
     try {
+      console.log("fromUpdateUser", userId, profile);
       const response = await axios.patch(`/users/updateprofile/${userId}`, {
         address,
         gender,
@@ -88,7 +86,12 @@ export const userLogoutAsync = createAsyncThunk("user/userLogout", async () => {
   }
 });
 
-const userInitialState = { user: null, isUserLoggedIn: false, isReady: false };
+const userInitialState = {
+  user: null,
+  userRegistered: false,
+  isUserLoggedIn: false,
+  isReady: false,
+};
 
 const userSlice = createSlice({
   name: "User",
@@ -109,6 +112,9 @@ const userSlice = createSlice({
       })
       .addCase(userRegisterAsync.fulfilled, (state, action) => {
         state.loading = false;
+
+        console.log("REGISTER----->", action.payload);
+        state.userRegistered = true;
         state.user = action.payload;
         state.isUserLoggedIn = true;
         state.isReady = true;
@@ -116,6 +122,7 @@ const userSlice = createSlice({
       .addCase(userRegisterAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        state.userRegistered = false;
       })
       .addCase(fetchUserAsync.pending, (state) => {
         state.loading = true;
@@ -130,12 +137,14 @@ const userSlice = createSlice({
       .addCase(fetchUserAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        // toast.error("bsjfbjasb");
       })
       .addCase(userLoginAsync.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(userLoginAsync.fulfilled, (state, action) => {
+        console.log("LOGIN----->", action.payload);
         state.loading = false;
         state.user = action.payload;
         state.isUserLoggedIn = true;

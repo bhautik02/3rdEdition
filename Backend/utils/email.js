@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 const path = require("path");
+const handlebars = require("handlebars");
 
 async function sendEmail(options) {
   // Read the email template file

@@ -31,6 +31,7 @@ const ProfileForm = () => {
     setGender("");
     setAboutMe("");
     setPhone("");
+    setOpen(false);
   };
 
   const handleClickOpen = () => {
@@ -55,16 +56,14 @@ const ProfileForm = () => {
             color: "white",
             border: "none",
           },
-        }}
-      >
+        }}>
         Update me
       </Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <DialogTitle className="flex justify-center">
           {"Update Your Profile"}
         </DialogTitle>
@@ -76,6 +75,7 @@ const ProfileForm = () => {
                 // type="textarea"
                 value={aboutMe}
                 rows={5}
+                required
                 placeholder="tell us about your self"
                 onChange={(e) => setAboutMe(e.target.value)}
                 className="block w-96"
@@ -85,6 +85,7 @@ const ProfileForm = () => {
                 Address:
                 <input
                   type="text"
+                  required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
@@ -93,9 +94,9 @@ const ProfileForm = () => {
               <label>
                 Gender:
                 <select
+                  required
                   value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                >
+                  onChange={(e) => setGender(e.target.value)}>
                   <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -107,27 +108,27 @@ const ProfileForm = () => {
                 Phone Number:
                 <input
                   type="tel"
+                  required
                   value={phone}
+                  minLength={10}
+                  maxLength={10}
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </label>
               <br />
               <div className="flex justify-end mt-4 gap-4">
                 <button
-                  onClick={handleClose}
-                  className="bg-grey rounded-lg px-4 py-2"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleClose}
                   type="submit"
-                  className="bg-primary text-white rounded-lg px-4 py-2 "
-                >
+                  className="bg-primary text-white rounded-lg px-4 py-2 ">
                   Submit
                 </button>
               </div>
             </form>
+            <button
+              onClick={handleClose}
+              className="bg-grey rounded-lg px-4 py-2">
+              Cancel
+            </button>
           </div>
         </DialogContent>
       </Dialog>

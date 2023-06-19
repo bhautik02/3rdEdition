@@ -7,18 +7,9 @@ const reviewSchema = new mongoose.Schema(
       ref: "Place",
       required: true,
     },
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: true,
-    },
     bookingId: {
       type: mongoose.Schema.ObjectId,
       ref: "Booking",
-      required: true,
-    },
-    name: {
-      type: String,
       required: true,
     },
     rating: {
@@ -27,6 +18,19 @@ const reviewSchema = new mongoose.Schema(
       enum: [1, 2, 3, 4, 5],
     },
     review: {
+      type: String,
+      required: true,
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    profile: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },

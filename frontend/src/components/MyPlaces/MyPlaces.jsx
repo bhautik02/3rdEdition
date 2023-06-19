@@ -1,15 +1,14 @@
-//mui imports
-import Card from "@mui/material/Card";
 import { Box, Modal } from "@mui/material";
 import PlusSvg from "../../utils/svg/PlusSvg";
 import { useEffect, useState } from "react";
 import HostingSlider from "../HostingSlider";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   deletePlaceAsync,
   getAllHostedPlacesByUserAsync,
 } from "../../store/addPlace";
+import DataNotFound from "../DataNotFound";
 
 const style = {
   position: "absolute",
@@ -27,8 +26,7 @@ const MyPlaces = (props) => {
   const user = useSelector((state) => state.user.user);
   const hostedData = useSelector((state) => state.addPlace.yourHostedPlaces);
   const dispatch = useDispatch();
-
-  // const userId = user?._id;
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const [editingPlaceInfo, setEditingPlaceInfo] = useState();
@@ -46,6 +44,8 @@ const MyPlaces = (props) => {
   useEffect(() => {
     if (user) {
       dispatch(getAllHostedPlacesByUserAsync(user._id));
+    } else {
+      navigate("/login");
     } // eslint-disable-next-line
   }, [user]);
 
@@ -54,23 +54,13 @@ const MyPlaces = (props) => {
   };
 
   const deletePlaceHandler = (placeID) => {
-    // console.log("c;iceksf", placeID);
     dispatch(deletePlaceAsync(placeID));
   };
 
   return (
     <>
-      <div className="text-center p-6">
-        <button
-          to="addPlaces"
-          className="inline-flex gap-1  py-1 px-4 bg-primary rounded-full text-white"
-          onClick={handleOpen}>
-          <PlusSvg />
-          Add Place
-        </button>
-      </div>
       <div>
-        <p className="flex text-3xl font-semibold  -mb-4 justify-center ">
+        <p className="flex text-3xl font-semibold  mt-10 justify-center uppercase">
           My Hosted Places
         </p>
         <Modal
@@ -95,28 +85,19 @@ const MyPlaces = (props) => {
           </Box>
         </Modal>
       </div>
+      <div className="text-center -mb-14 p-6">
+        <button
+          to="addPlaces"
+          className="inline-flex gap-1  py-1 px-4 bg-primary rounded-full text-white"
+          onClick={handleOpen}>
+          <PlusSvg />
+          Add Place
+        </button>
+      </div>
       {!hostedData ? (
-        <div className="flex  justify-center m-3 ">
-          <Card
-            sx={{
-              width: 500,
-              height: 400,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-            <h1 className="absolute -mt-96">
-              You not Hosted any Place, Start Hosting...
-            </h1>
-            <img
-              src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?w=2000"
-              alt="No Data Found."
-              height={"500px"}
-            />
-          </Card>
-        </div>
+        <DataNotFound />
       ) : (
-        <div className="pt-10">
+        <div className="pt-10 mb-10">
           <div className="mx-auto md:px-10 sm:px-2 px-4 xsm:ml-20px ">
             <div className=" grid  grid-cols-1  sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-8 ">
               {hostedData &&
@@ -167,4 +148,3 @@ const MyPlaces = (props) => {
 };
 
 export default MyPlaces;
-//

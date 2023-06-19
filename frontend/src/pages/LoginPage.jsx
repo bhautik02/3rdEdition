@@ -1,30 +1,31 @@
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { userLoginAsync } from "../store/user";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
   //to take input from user while login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
 
-  //to redirect user after login
-  const [redirect, setRedirect] = useState(false);
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   //submit handler for userlogin
   const onUserLogin = (event) => {
     event.preventDefault();
 
     dispatch(userLoginAsync({ email, password }));
-    setRedirect(true);
     setEmail("");
     setPassword("");
+    navigate("/");
   };
-
-  if (redirect) {
-    return <Navigate to={"/"} />;
-  }
 
   return (
     <div className="mt-36 grow flex items-center justify-around">
@@ -50,6 +51,14 @@ const LoginPage = () => {
             }}
           />
           <button className="primary">login</button>
+          {/* <div className="text-center py-2 text-gray-500">
+            Don't have account?{" "} */}
+          <Link
+            to="/forgetPassword"
+            className="flex mt-2 underline text-primary justify-center">
+            Forget password
+          </Link>
+          {/* </div> */}
           <div className="text-center py-2 text-gray-500">
             Don't have account?{" "}
             <Link to="/register" className="underline text-black">

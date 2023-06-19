@@ -3,15 +3,16 @@ import axios from "axios";
 
 export const getAllPlacesAsync = createAsyncThunk(
   "place/getAllPlaces",
-  async ({ category, min, max }) => {
+  async (Data) => {
     try {
-      const response = await axios.post(
-        // `place/hostPlaces?min=${min}&max=${max}`,
-        `place/hostPlaces`,
-        { category }
-      );
-      const allPlaces = response.data.hostedPlace;
-      return allPlaces;
+      const { category, setPage } = Data;
+      // console.log(setPage, jani);
+      const response = await axios.post(`place/hostPlaces?page=${setPage}`, {
+        // const response = await axios.post(`place/hostPlaces`, {
+        category,
+      });
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       return error.response.data.message;
     }
@@ -35,6 +36,7 @@ const InitialState = {
   allPlaces: null,
   placeData: null,
   bookedDatesOfPlace: null,
+  totalPages: 1,
 };
 
 const placeSlice = createSlice({
@@ -54,7 +56,8 @@ const placeSlice = createSlice({
       })
       .addCase(getAllPlacesAsync.fulfilled, (state, action) => {
         state.loading = true;
-        state.allPlaces = action.payload;
+        state.allPlaces = action.payload.hostedPlace;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(getAllPlacesAsync.rejected, (state, action) => {
         state.loading = false;

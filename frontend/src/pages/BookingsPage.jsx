@@ -3,15 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ReviewDialogBox from "../components/ReviewDialogBox";
 import { getAllbookingAsync } from "../store/booking";
+import { useNavigate } from "react-router-dom";
 
 const BookingsPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const { allBookings } = useSelector((state) => state.booking);
 
   useEffect(() => {
     if (user) {
       dispatch(getAllbookingAsync(user._id));
+    } else {
+      navigate("/login");
     }
     // eslint-disable-next-line
   }, [user]);
@@ -24,25 +28,30 @@ const BookingsPage = () => {
   };
 
   return (
-    <>
-      <p className="flex text-3xl font-semibold mt-2 -mb-4 justify-center ">
+    <div className="mb-16">
+      <p className="flex text-3xl font-semibold  mt-10 justify-center uppercase">
         My Bookings
       </p>
-      <div className="flex gap-10 justify-center">
-        {/* <div className="mt-10 ">
-          <div className="shadow-2xl shadow-black-300 h-64 w-64 rounded-2xl flex-row justify-center">
-            <div className="pt-8 pl-14">
-              <img
-                className="h-36 w-36 object-cover rounded-full"
-                src="https://w7.pngwing.com/pngs/49/613/png-transparent-computer-icons-avatar-user-profile-avatar-heroes-dark-black.png"
-                alt="place"
-              />
+
+      {/* <div className="flex gap-10 justify-center"> */}
+      {/* <div className="shadow-2xl shadow-black-300 h-64 w-80 mt-8  rounded-2xl">
+          <div className="flex col-span-2 bg-lightblue p-8 justify-center">
+            <div>
+              <label className="relative">
+                <img
+                  className="h-36 w-36 object-cover rounded-full"
+                  src={user?.profile}
+                  alt="place"
+                />
+              </label>
+              <h2 className="flex font-bold mt-2 text-3xl justify-center">
+                {user && user?.name.split(" ")[0]}
+              </h2>
             </div>
-            <h2 className="font-bold text-3xl mt-3 flex justify-center">
-              {user.name}
-            </h2>
+            <div className="col-span-1 bg-lightblue "></div>
           </div>
         </div> */}
+      <div className="flex gap-10 justify-left">
         <div className="w-5/12">
           {allBookings &&
             allBookings.map((booking) => (
@@ -80,7 +89,10 @@ const BookingsPage = () => {
                         Contact Host
                       </Link>
                       {canReview(booking.checkOut) && (
-                        <ReviewDialogBox bookingData={booking} />
+                        <ReviewDialogBox
+                          bookingData={booking}
+                          userData={user}
+                        />
                       )}
                     </div>
                   </div>
@@ -96,7 +108,7 @@ const BookingsPage = () => {
             ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default BookingsPage;

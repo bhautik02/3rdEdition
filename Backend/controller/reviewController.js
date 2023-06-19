@@ -6,7 +6,7 @@ const AppError = require("../utils/appError");
 
 const createReview = CatchAsync(async (req, res, next) => {
   const bookingId = req.params.id;
-  const { place, user, name, rating, review } = req.body;
+  const { place, user, name, profile, rating, review } = req.body;
 
   const booking = await Booking.findById(bookingId);
 
@@ -31,6 +31,7 @@ const createReview = CatchAsync(async (req, res, next) => {
     name,
     rating,
     review,
+    profile,
     isDeleted: false,
   });
 

@@ -17,17 +17,11 @@ import { MdOutlineApartment, MdOutlineCabin, MdPool } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { getAllPlacesAsync } from "../store/place";
 
-// const activeClassName = ({ isActive }) =>
-//   isActive
-//     ? "flex mt-8 mx-10  gap-10 justify-between "
-//     : "flex mt-8 mx-10  gap-10 justify-between";
-
 const Filters = () => {
   const dispatch = useDispatch();
 
   const filterByCategory = (category) => {
-    console.log("dahhlfas", category);
-    dispatch(getAllPlacesAsync(category));
+    dispatch(getAllPlacesAsync({ category }));
   };
 
   return (
@@ -50,7 +44,7 @@ const Filters = () => {
         </div>
         Apartment
       </NavLink>
-      <NavLink onClick={filterByCategory.bind(null, "campingsite")}>
+      <NavLink onClick={filterByCategory.bind(null, "campsite")}>
         <div className="flex justify-center">
           <GiCampingTent className="w-8 h-8" />
         </div>

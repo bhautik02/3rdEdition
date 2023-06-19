@@ -5,7 +5,7 @@ import PhotoGallery from "../components/PhotoGallery";
 import AddressLink from "../components/AddressLink";
 import BookingWidget from "../components/BookingWidget";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegStar } from "react-icons/fa";
+import { AiTwotoneStar } from "react-icons/ai";
 import ShowAmenities from "../components/ShowAmenities";
 import CheckInSvg from "../utils/svg/CheckInSvg";
 import CheckOutSvg from "../utils/svg/CheckOutSvg";
@@ -48,11 +48,39 @@ const PlacePage = () => {
     <div>
       {ready && (
         <>
-          <div className="mx-80 pt-4">
-            <h1 className="text-3xl">{placeData.title}</h1>
-            <AddressLink>{placeData.address}</AddressLink>
-            <PhotoGallery place={placeData} />
-            {/* <PhotosPlace place={placeData} /> */}
+          <div className="mx-80 pt-4 ">
+            <h1 className="mt-4 text-3xl font-medium">{placeData.title}</h1>
+            {/* <div className="font-medium">
+              <p className=" text-gray-800 ">
+                {placeData.totalRatings > 1 && (
+                  <>
+                    {placeData.totalRatings / placeData.numberOfReview}{" "}
+                    <FaRegStar className="inline h-4 w-4 -mt-1" /> &#183;{" "}
+                  </>
+                )}
+                {reviews.length} Reviews
+              </p>
+              <AddressLink>{placeData.address}</AddressLink>
+            </div> */}
+            <div className="font-medium flex items-center">
+              <p className="text-gray-800 text-sm">
+                {placeData.totalRatings > 1 && (
+                  <>
+                    {(
+                      placeData.totalRatings / placeData.numberOfReview
+                    ).toFixed(2)}{" "}
+                    <AiTwotoneStar className="inline h-4 w-4 -mt-1" /> &#183;{" "}
+                  </>
+                )}
+                {reviews.length} {reviews.length === 1 ? "Review" : "Reviews"}
+              </p>
+              &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+              <AddressLink className="ml-4">{placeData.address}</AddressLink>
+            </div>
+            {console.log(placeData)}
+            <div className="mt-6">
+              <PhotoGallery place={placeData} />
+            </div>
             <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
               <div className="relative">
                 <div className="flex my-4 ">
@@ -69,7 +97,7 @@ const PlacePage = () => {
                     </p>
                   </div>
                   <img
-                    src="https://img.freepik.com/free-icon/user_318-804790.jpg"
+                    src={placeData?.host[0].profile}
                     alt=""
                     className="w-14 h-14 absolute  top-3 end-0 border-grey-800 rounded-full bg-gray-200"
                   />
@@ -119,8 +147,11 @@ const PlacePage = () => {
                     <p className=" text-gray-800 font-medium text-2xl">
                       {placeData.totalRatings > 1 && (
                         <>
-                          {placeData.totalRatings / placeData.numberOfReview}{" "}
-                          <FaRegStar className="inline h-5 w-5 -mt-1" /> &#183;{" "}
+                          {(
+                            placeData.totalRatings / placeData.numberOfReview
+                          ).toFixed(2)}{" "}
+                          <AiTwotoneStar className="inline h-5 w-5 -mt-1" />{" "}
+                          &#183;{" "}
                         </>
                       )}
                       {reviews.length} Reviews
@@ -131,9 +162,9 @@ const PlacePage = () => {
                           <div className="">
                             <div className="flex mt-10 gap-4">
                               <img
-                                src="https://img.freepik.com/free-icon/user_318-804790.jpg"
+                                src={review?.profile}
                                 alt=""
-                                className="w-12 h-12  top-0 left-0 rounded-full bg-red-500"
+                                className="w-12 h-12  top-0 left-0 rounded-full"
                               />
                               <div>
                                 <h1 className="text-lg font-medium">
@@ -204,7 +235,7 @@ const PlacePage = () => {
               <div className="">
                 <div className="flex mt-10 gap-4">
                   <img
-                    src="https://img.freepik.com/free-icon/user_318-804790.jpg"
+                    src={placeData?.host[0].profile}
                     alt=""
                     className="  w-14 h-14  top-0 left-0 rounded-full bg-red-500"
                   />

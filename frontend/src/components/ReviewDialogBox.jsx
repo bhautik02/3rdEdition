@@ -6,7 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
 import { createReviewAsync } from "../store/review";
 
-export default function ReviewDialogBox({ bookingData }) {
+export default function ReviewDialogBox({ bookingData, userData }) {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [rating, setRating] = React.useState(0);
@@ -29,15 +29,17 @@ export default function ReviewDialogBox({ bookingData }) {
     const reviewBy = bookingData.name;
     const bookingID = bookingData._id;
     const place = bookingData.place;
-    const user = bookingData.bookBy;
+    const userId = bookingData.bookBy;
 
     // const formData = { name: reviewBy, place, user, rating, review };
+
     dispatch(
       createReviewAsync({
         bookingID,
         name: reviewBy,
         place,
-        user,
+        user: userId,
+        profile: userData?.profile,
         rating,
         review,
       })
@@ -52,6 +54,7 @@ export default function ReviewDialogBox({ bookingData }) {
         className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base">
         Review it
       </button>
+      {console.log("snvlksdnvknv", userData)}
       <Dialog
         open={open}
         onClose={handleClose}

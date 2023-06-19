@@ -7,12 +7,14 @@ export const createReviewAsync = createAsyncThunk(
   async (reviewFormData) => {
     try {
       console.log("formData-------->", reviewFormData);
-      const { name, place, user, rating, review, bookingID } = reviewFormData;
+      const { name, place, user, profile, rating, review, bookingID } =
+        reviewFormData;
       const response = await axios.post(`review/reviews/${bookingID}`, {
         name,
         place,
         user,
         rating,
+        profile,
         review,
       });
       const reviewRes = response.data.review;

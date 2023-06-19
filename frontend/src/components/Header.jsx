@@ -1,11 +1,6 @@
-import { Link } from "react-router-dom";
-import Logosvg from "../utils/svg/LogoSvg";
-import SearchSvg from "../utils/svg/SearchSvg";
-import UserSvg from "../utils/svg/UserLoginSvg";
-import { useSelector } from "react-redux";
-/////////////////////////
-
 import * as React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,12 +13,17 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 import { SiGooglehome } from "react-icons/si";
+import { userLogoutAsync } from "../store/user";
 
 const pages = ["HostPlace", "Bookings", "Reservations", "Profile"];
 const settings = ["Login", "Logout"];
 
 function Header() {
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -41,7 +41,14 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const user = useSelector((state) => state.user);
+
+  const logoutHandler = () => {
+    dispatch(userLogoutAsync());
+    navigate("/");
+  };
+
+  const activeClassName = ({ isActive }) =>
+    isActive ? "underline underline-offset-4" : "";
   return (
     <AppBar
       position="fixed"
@@ -50,13 +57,11 @@ function Header() {
         color: "black",
         boxShadow: "none",
         // marginLeft: "5px",
-      }}
-    >
+      }}>
       <Container maxWidth="xl">
         <Toolbar
           disableGutters
-          sx={{ marginLeft: "-135px", marginRight: "-135px" }}
-        >
+          sx={{ marginLeft: "-135px", marginRight: "-135px" }}>
           <div className="mr-4">
             <SiGooglehome />
           </div>
@@ -73,8 +78,7 @@ function Header() {
               // letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-            }}
-          >
+            }}>
             Accomodo
           </Typography>
 
@@ -85,8 +89,7 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+              color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu
@@ -105,8 +108,7 @@ function Header() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
-              }}
-            >
+              }}>
               {pages.map((page) => (
                 <div key={Math.random()}>
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -119,7 +121,10 @@ function Header() {
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link to={`/${page.toLowerCase()}`} key={page}>
+              <NavLink
+                to={`/${page.toLowerCase()}`}
+                key={page}
+                className={activeClassName}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
@@ -128,15 +133,14 @@ function Header() {
                     color: "black",
                     display: "block",
                     mx: "10px",
-                    "&:hover": {
-                      backgroundColor: "#F5385D",
-                      color: "white",
-                    },
-                  }}
-                >
+                    // "&:hover": {
+                    //   backgroundColor: "#F5385D",
+                    //   color: "white",
+                    // },
+                  }}>
                   {page}
                 </Button>
-              </Link>
+              </NavLink>
             ))}
           </Box>
           {user && (
@@ -144,8 +148,7 @@ function Header() {
               variant="body2"
               noWrap
               component="div"
-              sx={{ textAlign: "center", margin: "10px", fontSize: "16px" }}
-            >
+              sx={{ textAlign: "center", margin: "10px", fontSize: "16px" }}>
               {user?.name}
               {console.log("ftyguhijo", user)}
             </Typography>
@@ -153,10 +156,7 @@ function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt=""
-                  src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-                />
+                <Avatar alt="" src={user?.profile} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -173,47 +173,29 @@ function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
-                <Link to={`${setting.toLowerCase()}`} key={setting}>
-                  <MenuItem onClick={handleCloseUserMenu} key={Math.random()}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                </Link>
+                <div key={setting}>
+                  {setting === "Logout" ? (
+                    <MenuItem onClick={logoutHandler} key={Math.random()}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ) : (
+                    <Link to={`${setting.toLowerCase()}`}>
+                      <MenuItem
+                        onClick={handleCloseUserMenu}
+                        key={Math.random()}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    </Link>
+                  )}
+                </div>
               ))}
             </Menu>
           </Box>
         </Toolbar>
       </Container>
       <hr />
-      {/* <div className=" justify-between">
-        <header className=" flex justify-between mt-4 pl-10 pr-10">
-          <a href="/" className="flex items-center gap-1 ">
-            <Logosvg />
-            <p className="font-bold text-2xl">title</p>
-          </a>
-
-          <div className="flex  border border-grey-500 rounded-full gap-2 p-2 shadow-lg shadow-grey-100">
-            <input
-              type="text"
-              className="w-36 h-full rounded-full border-none"
-            />
-            <button className="bg-primary rounded-full p-1">
-              <SearchSvg />
-            </button>
-          </div>
-          <div className="flex  gap-1 ">
-            <Link
-              to={user ? "/account/myAccount" : "/login"}
-              className="flex border items-center border-grey-500 rounded-full gap-2 p-2">
-              <UserSvg />
-              {user ? <div>{user.name.split(" ")[0]}</div> : <div>Login</div>}
-            </Link>
-          </div>
-        </header>
-        <hr className="mt-4" />
-      </div> */}
     </AppBar>
   );
 }
