@@ -64,14 +64,16 @@ const PlacePage = () => {
             </div> */}
             <div className="font-medium flex items-center">
               <p className="text-gray-800 text-sm">
-                {placeData.totalRatings > 1 && (
+                {
                   <>
-                    {(
-                      placeData.totalRatings / placeData.numberOfReview
-                    ).toFixed(2)}{" "}
+                    {placeData.totalRatings > 1
+                      ? (
+                          placeData.totalRatings / placeData.numberOfReview
+                        ).toFixed(2)
+                      : 0}
                     <AiTwotoneStar className="inline h-4 w-4 -mt-1" /> &#183;{" "}
                   </>
-                )}
+                }
                 {reviews.length} {reviews.length === 1 ? "Review" : "Reviews"}
               </p>
               &nbsp;&nbsp;&#183;&nbsp;&nbsp;

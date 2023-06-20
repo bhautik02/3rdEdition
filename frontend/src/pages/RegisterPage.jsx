@@ -31,7 +31,7 @@ const RegisterPage = () => {
         <h1 className="text-4xl text-center mb-4">Register</h1>
 
         {isLoading && (
-          <div className=" top-20 bottom-20 left-0 right-0 fixed backdrop-brightness-75">
+          <div className=" top-0 bottom-0 left-0 right-0 fixed backdrop-brightness-75">
             <div className="mt-24">
               <LoadingSpinner />
             </div>

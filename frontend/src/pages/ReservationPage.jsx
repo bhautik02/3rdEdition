@@ -13,8 +13,6 @@ const ReservationPages = () => {
   useEffect(() => {
     if (user) {
       dispatch(getAllHostedPlacesByUserAsync(user._id));
-    } else {
-      navigate("/login");
     } // eslint-disable-next-line
   }, [user]);
 

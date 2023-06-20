@@ -37,6 +37,7 @@ const InitialState = {
   placeData: null,
   bookedDatesOfPlace: null,
   totalPages: 1,
+  showPhotos: false,
 };
 
 const placeSlice = createSlice({
@@ -47,15 +48,19 @@ const placeSlice = createSlice({
       state.bookedDatesOfPlace = action.payload;
       console.log("bookedDates", action.payload);
     },
+    showPhotos(state, action) {
+      state.showPhotos = !state.showPhotos;
+      console.log("show", state.showPhotos);
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAllPlacesAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(getAllPlacesAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.allPlaces = action.payload.hostedPlace;
         state.totalPages = action.payload.totalPages;
       })
@@ -65,11 +70,11 @@ const placeSlice = createSlice({
       })
 
       .addCase(getPlaceAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(getPlaceAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.placeData = action.payload;
       })
       .addCase(getPlaceAsync.rejected, (state, action) => {

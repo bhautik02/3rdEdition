@@ -44,11 +44,11 @@ const bookingSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(bookPlaceAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(bookPlaceAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.newBooking = action.payload;
       })
       .addCase(bookPlaceAsync.rejected, (state, action) => {
@@ -56,11 +56,11 @@ const bookingSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(getAllbookingAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(getAllbookingAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.allBookings = action.payload;
       })
       .addCase(getAllbookingAsync.rejected, (state, action) => {

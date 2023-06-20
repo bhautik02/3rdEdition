@@ -3,19 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ReviewDialogBox from "../components/ReviewDialogBox";
 import { getAllbookingAsync } from "../store/booking";
-import { useNavigate } from "react-router-dom";
 
 const BookingsPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.booking);
   const { allBookings } = useSelector((state) => state.booking);
-
+  console.log(loading);
   useEffect(() => {
     if (user) {
       dispatch(getAllbookingAsync(user._id));
-    } else {
-      navigate("/login");
     }
     // eslint-disable-next-line
   }, [user]);

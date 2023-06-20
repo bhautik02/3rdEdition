@@ -15,14 +15,6 @@ import {
 export default function ProfilePage() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-  //to redirect user after login
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    } // eslint-disable-next-line
-  }, [user]);
 
   const changeProfileHandler = (event) => {
     let file = event.target.files[0];
@@ -73,7 +65,7 @@ export default function ProfilePage() {
                 <p></p>
               </div>
             </div>
-            <div className="col-span-1 bg-lightblue ">
+            {/* <div className="col-span-1 bg-lightblue ">
               <div className="flex-col items-center my-4 mt-14">
                 <div className="">
                   <p className="text-2xl font-semibold">278</p>
@@ -88,7 +80,7 @@ export default function ProfilePage() {
                   <p className="text-xs">Rating</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

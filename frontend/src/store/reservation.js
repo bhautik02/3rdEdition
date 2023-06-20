@@ -25,11 +25,11 @@ const reservationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllReservationsAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(getAllReservationsAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.allReservations = action.payload;
       })
       .addCase(getAllReservationsAsync.rejected, (state, action) => {

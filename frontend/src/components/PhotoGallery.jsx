@@ -1,7 +1,19 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { placeActions } from "../store/place";
 
 export default function PhotoGallery({ place }) {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const dispatch = useDispatch();
+
+  const openGalleryHandler = () => {
+    setShowAllPhotos(true);
+    dispatch(placeActions.showPhotos());
+  };
+  const closeGalleryHandler = () => {
+    setShowAllPhotos(false);
+    dispatch(placeActions.showPhotos());
+  };
 
   if (showAllPhotos) {
     return (
@@ -10,7 +22,7 @@ export default function PhotoGallery({ place }) {
           <div>
             {/* <h2 className="text-3xl mr-48">Photos of {place.title}</h2> */}
             <button
-              onClick={() => setShowAllPhotos(false)}
+              onClick={closeGalleryHandler}
               className="fixed right-12 top-8 flex gap-1 py-2 px-4 rounded-md shadow shadow-black bg-white text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -95,8 +107,8 @@ export default function PhotoGallery({ place }) {
       </div>
 
       <button
-        onClick={() => setShowAllPhotos(true)}
-        className="flex gap-1 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-md shadow shadow-md shadow-gray-500">
+        onClick={openGalleryHandler}
+        className="flex gap-1 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-md shadow shadow-gray-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

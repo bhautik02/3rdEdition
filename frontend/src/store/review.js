@@ -55,11 +55,11 @@ const reviewSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createReviewAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(createReviewAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
         state.allPlaces = action.payload;
       })
       .addCase(createReviewAsync.rejected, (state, action) => {
@@ -67,13 +67,13 @@ const reviewSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(getAllHostedPlacesByUserAsync.pending, (state) => {
-        state.loading = false;
+        state.loading = true;
         state.error = null;
       })
       .addCase(getAllHostedPlacesByUserAsync.fulfilled, (state, action) => {
-        state.loading = true;
+        state.loading = false;
 
-        console.log("------ state.yourHostedPlaces ------", action.payload);
+        // console.log("------ state.yourHostedPlaces ------", action.payload);
         state.yourHostedPlaces = action.payload;
       })
       .addCase(getAllHostedPlacesByUserAsync.rejected, (state, action) => {
