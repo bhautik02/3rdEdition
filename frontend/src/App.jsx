@@ -22,6 +22,8 @@ import ReservationDetailPage from "./pages/ReservationDetailPage";
 import MyPlaces from "./components/MyPlaces/MyPlaces";
 import ReservationPages from "./pages/ReservationPage";
 import AdminPage from "./pages/AdminPage";
+import { Dashboard } from "@mui/icons-material";
+import Places from "./components/Dashboard/Places";
 
 axios.defaults.baseURL = "http://localhost:5000/api/v1/";
 const URL = "http://localhost:5000/api/v1/users/profile";
@@ -52,8 +54,15 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         {console.log("fromApp", user)}
+
         {user && user.isAdmin ? (
-          <Route path="/" element={<AdminPage />}></Route>
+          <Route>
+            <Route path="/" element={<AdminPage />}>
+              <Route path="/users" element={<Places />}></Route>
+              <Route path="/places" element={<AdminPage />}></Route>
+              <Route path="/analytics" element={<AdminPage />}></Route>
+            </Route>
+          </Route>
         ) : (
           <Route path="/" element={<Layout />}>
             <Route index path="/" element={<HomePage />} />

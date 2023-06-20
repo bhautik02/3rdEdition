@@ -8,6 +8,7 @@ import DataNotFound from "../components/DataNotFound";
 import BasicPagination from "../components/Pagination";
 import { Pagination } from "@mui/material";
 import { AiTwotoneStar } from "react-icons/ai";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
@@ -78,6 +79,7 @@ const HomePage = () => {
               })}
             </div>
           </div>
+          {/* <Dashboard /> */}
         </div>
       )}
 
