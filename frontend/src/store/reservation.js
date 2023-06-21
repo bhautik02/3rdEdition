@@ -3,10 +3,12 @@ import axios from "axios";
 
 export const getAllReservationsAsync = createAsyncThunk(
   "reservation/getAllReservations",
-  async (placeId) => {
+  async ({ placeId, page, rowsPerPage }) => {
     try {
-      const response = await axios.get(`/reservation/${placeId}`);
-      const allReservations = response.data.reservations;
+      const response = await axios.get(
+        `/reservation/${placeId}?page=${page + 1}&limit=${rowsPerPage}`
+      );
+      const allReservations = response.data;
       return allReservations;
     } catch (error) {
       return error.response.data.message;
@@ -15,6 +17,7 @@ export const getAllReservationsAsync = createAsyncThunk(
 );
 
 const InitialReservationState = {
+  totalReservations: 0,
   allReservations: [],
 };
 
@@ -30,7 +33,8 @@ const reservationSlice = createSlice({
       })
       .addCase(getAllReservationsAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.allReservations = action.payload;
+        state.allReservations = action.payload.reservations;
+        state.totalReservations = action.payload.totalReservations;
       })
       .addCase(getAllReservationsAsync.rejected, (state, action) => {
         state.loading = false;

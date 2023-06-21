@@ -23,14 +23,17 @@ const ProfileForm = () => {
   const [aboutMe, setAboutMe] = useState("");
   const [phone, setPhone] = useState("");
 
+  React.useEffect(() => {
+    setAddress(user?.address);
+    setGender(user?.gender);
+    setAboutMe(user?.aboutMe);
+    setPhone(user?.phone);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = user?._id;
     dispatch(userUpdateAsync({ userId, address, gender, aboutMe, phone }));
-    setAddress("");
-    setGender("");
-    setAboutMe("");
-    setPhone("");
     setOpen(false);
   };
 
@@ -38,7 +41,8 @@ const ProfileForm = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.preventDefault();
     setOpen(false);
   };
 
@@ -56,14 +60,16 @@ const ProfileForm = () => {
             color: "white",
             border: "none",
           },
-        }}>
+        }}
+      >
         Update me
       </Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}>
+        onClose={handleClose}
+      >
         <DialogTitle className="flex justify-center">
           {"Update Your Profile"}
         </DialogTitle>
@@ -96,7 +102,8 @@ const ProfileForm = () => {
                 <select
                   required
                   value={gender}
-                  onChange={(e) => setGender(e.target.value)}>
+                  onChange={(e) => setGender(e.target.value)}
+                >
                   <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -118,17 +125,19 @@ const ProfileForm = () => {
               <br />
               <div className="flex justify-end mt-4 gap-4">
                 <button
+                  onClick={handleClose}
+                  className="bg-grey rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+                <button
                   type="submit"
-                  className="bg-primary text-white rounded-lg px-4 py-2 ">
+                  className="bg-primary text-white rounded-lg px-4 py-2 "
+                >
                   Submit
                 </button>
               </div>
             </form>
-            <button
-              onClick={handleClose}
-              className="bg-grey rounded-lg px-4 py-2">
-              Cancel
-            </button>
           </div>
         </DialogContent>
       </Dialog>

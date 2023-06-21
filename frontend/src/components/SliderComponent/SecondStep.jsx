@@ -224,7 +224,8 @@ const SecondStep = forwardRef((props, ref) => {
                 }}
                 onMouseLeave={() => {
                   setRemove(false);
-                }}>
+                }}
+              >
                 <img
                   src={image}
                   style={{
@@ -243,7 +244,8 @@ const SecondStep = forwardRef((props, ref) => {
                       position: "absolute",
                       justifyContent: "center",
                       marginTop: "20px",
-                    }}>
+                    }}
+                  >
                     <TiDelete className="h-14 w-14 fill-white" />
                   </Button>
                 )}

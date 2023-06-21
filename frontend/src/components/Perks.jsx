@@ -1,12 +1,4 @@
 export default function Perks({ selected, onChange }) {
-  // function handleCbClick(ev) {
-  //   const { checked, name } = ev.target;
-  //   if (checked) {
-  //     onChange([...selected, name]);
-  //   } else {
-  //     onChange([...selected.filter((selectedName) => selectedName !== name)]);
-  //   }
-  // }
   return (
     <>
       <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
@@ -22,7 +14,8 @@ export default function Perks({ selected, onChange }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6">
+          className="w-6 h-6"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -44,7 +37,8 @@ export default function Perks({ selected, onChange }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6">
+          className="w-6 h-6"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -66,7 +60,8 @@ export default function Perks({ selected, onChange }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6">
+          className="w-6 h-6"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -88,7 +83,8 @@ export default function Perks({ selected, onChange }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6">
+          className="w-6 h-6"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -110,7 +106,8 @@ export default function Perks({ selected, onChange }) {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6">
+          className="w-6 h-6"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -132,7 +129,8 @@ export default function Perks({ selected, onChange }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6">
+          className="w-6 h-6"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

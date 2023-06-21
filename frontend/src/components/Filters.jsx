@@ -13,7 +13,12 @@ import {
   FaUmbrellaBeach,
   FaWarehouse,
 } from "react-icons/fa";
-import { MdOutlineApartment, MdOutlineCabin, MdPool } from "react-icons/md";
+import {
+  MdOutlineApartment,
+  MdOutlineCabin,
+  MdPool,
+  MdHome,
+} from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { getAllPlacesAsync } from "../store/place";
 
@@ -26,6 +31,12 @@ const Filters = () => {
 
   return (
     <div className="flex mt-8 mx-10  gap-10 justify-between text-gray-700">
+      <NavLink onClick={filterByCategory.bind(null, "")}>
+        <div className="flex justify-center">
+          <MdHome className="w-8 h-8" />
+        </div>
+        All
+      </NavLink>
       <NavLink onClick={filterByCategory.bind(null, "beachview")}>
         <div className="flex justify-center">
           <FaUmbrellaBeach className="w-8 h-8" />

@@ -99,7 +99,8 @@ export default function HostingSlider(props) {
               "& .MuiStepLabel-root .Mui-active": {
                 color: "black",
               },
-            }}>
+            }}
+          >
             <StepButton color="inherit" onClick={handleStep(index)}>
               {label}
             </StepButton>
@@ -124,7 +125,8 @@ export default function HostingSlider(props) {
                       bgcolor: "#F5385D",
                       color: "white",
                     },
-                  }}>
+                  }}
+                >
                   Close
                 </Button>
               </div>
@@ -134,7 +136,8 @@ export default function HostingSlider(props) {
                 display: "flex",
                 flexDirection: "row",
                 pt: 2,
-              }}>
+              }}
+            >
               <Box sx={{ flex: "1 1 auto" }} />
             </Box>
           </React.Fragment>
@@ -176,7 +179,8 @@ export default function HostingSlider(props) {
                     bgcolor: "#F5385D",
                     color: "white",
                   },
-                }}>
+                }}
+              >
                 Back
               </Button>
               <Button
@@ -188,7 +192,8 @@ export default function HostingSlider(props) {
                     bgcolor: "#F5385D",
                     color: "white",
                   },
-                }}>
+                }}
+              >
                 Next
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
@@ -197,7 +202,8 @@ export default function HostingSlider(props) {
                 (completed[activeStep] ? (
                   <Typography
                     variant="caption"
-                    sx={{ display: "flex", alignItems: "center" }}>
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
                     Step {activeStep + 1} already completed
                   </Typography>
                 ) : (
@@ -209,7 +215,8 @@ export default function HostingSlider(props) {
                         bgcolor: "#F5385D",
                         color: "white",
                       },
-                    }}>
+                    }}
+                  >
                     {completedSteps() === totalSteps() - 1 ? "Finish" : "NEXT"}
                   </Button>
                 ))}

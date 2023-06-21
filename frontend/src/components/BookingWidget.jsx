@@ -16,7 +16,6 @@ export default function BookingWidget({ place }) {
   const [redirect, setRedirect] = useState(false);
 
   const user = useSelector((state) => state.user.user);
-  // const bookingData = useSelector((state) => state.booking.newBooking);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

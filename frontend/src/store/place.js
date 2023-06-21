@@ -5,9 +5,9 @@ export const getAllPlacesAsync = createAsyncThunk(
   "place/getAllPlaces",
   async (Data) => {
     try {
-      const { category, setPage } = Data;
+      const { category, page } = Data;
       // console.log(setPage, jani);
-      const response = await axios.post(`place/hostPlaces?page=${setPage}`, {
+      const response = await axios.post(`place/hostPlaces?page=${page}`, {
         // const response = await axios.post(`place/hostPlaces`, {
         category,
       });

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 import PhotoGallery from "../components/PhotoGallery";
 import AddressLink from "../components/AddressLink";
 import BookingWidget from "../components/BookingWidget";
@@ -11,8 +10,6 @@ import CheckInSvg from "../utils/svg/CheckInSvg";
 import CheckOutSvg from "../utils/svg/CheckOutSvg";
 import BatchSvg from "../utils/svg/BatchSvg";
 import { getPlaceAsync, placeActions } from "../store/place";
-
-// import { getPlace } from "./../api";
 
 const PlacePage = () => {
   const dispatch = useDispatch();
@@ -50,18 +47,6 @@ const PlacePage = () => {
         <>
           <div className="mx-80 pt-4 ">
             <h1 className="mt-4 text-3xl font-medium">{placeData.title}</h1>
-            {/* <div className="font-medium">
-              <p className=" text-gray-800 ">
-                {placeData.totalRatings > 1 && (
-                  <>
-                    {placeData.totalRatings / placeData.numberOfReview}{" "}
-                    <FaRegStar className="inline h-4 w-4 -mt-1" /> &#183;{" "}
-                  </>
-                )}
-                {reviews.length} Reviews
-              </p>
-              <AddressLink>{placeData.address}</AddressLink>
-            </div> */}
             <div className="font-medium flex items-center">
               <p className="text-gray-800 text-sm">
                 {
@@ -94,7 +79,6 @@ const PlacePage = () => {
                     <p>
                       {placeData.maxGuest} Guests &#183;{" "}
                       {placeData.noOfBedrooms} bedroom &#183;{" "}
-                      {placeData.noOfBathrooms} beds &#183;{" "}
                       {placeData.noOfBathrooms} bathroom
                     </p>
                   </div>
@@ -192,46 +176,6 @@ const PlacePage = () => {
                 )}
               </div>
             </div>
-            {/* chatgpt review */}
-            {/* <div className="mt-5 flex items-center">
-              <div className="">
-                {reviews ? (
-                  <>
-                    <p className="text-gray-800 font-medium text-2xl">
-                      <StarSvg size={4} margin={2} /> {placeData.rating} 4.52
-                      &#183; {reviews.length} Reviews
-                    </p>
-                    <div className="grid grid-cols-2 gap-6 mt-4">
-                      {reviews.map((review, index) => {
-                        return (
-                          <div className="flex gap-4" key={index}>
-                            <img
-                              src="https://img.freepik.com/free-icon/user_318-804790.jpg"
-                              alt=""
-                              className="w-12 h-12 rounded-full bg-red-500"
-                            />
-                            <div>
-                              <h1 className="text-lg font-medium">
-                                {review.name}
-                              </h1>
-                              <p className="text-slate-500 text-sm">
-                                {review.createdAt.slice(0, 10)}
-                              </p>
-                              <p className="text-gray-600 text-base">
-                                {review.review}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </>
-                ) : (
-                  "No Reviews"
-                )}
-              </div>
-            </div> */}
-
             <hr className="mt-4"></hr>
             <div className="mt-5">
               <div className="">
@@ -257,15 +201,9 @@ const PlacePage = () => {
                 <div className="mt-8 text-gray-800">
                   <p className="my-3">Policy number: {hostData._id}</p>
                   <p className="my-3">Languages: English, हिन्दी</p>
-                  <p className="my-3">Response rate: 100%</p>
-                  <p className="my-3">Response time: within an hour</p>
                 </div>
                 <div className="my-10">
-                  <Link
-                    className="px-6 py-4 bg-gray-200 rounded-md outline-black text-base"
-                    to="/contact/chat">
-                    Contact host
-                  </Link>
+                  Contact host: {placeData?.host[0]?.phone}
                 </div>
               </div>
             </div>
@@ -278,22 +216,3 @@ const PlacePage = () => {
 };
 
 export default PlacePage;
-// <div className="flex-row my-4">
-//   <div className="">
-//     <img
-//       src="https://img.freepik.com/free-icon/user_318-804790.jpg"
-//       alt="profile"
-//       className="w-12 h-12 border-grey-800 rounded-full bg-gray-200"
-//     />
-//     <div>
-//       <span className="inline ml-4 5text-lg font-medium">
-//         {review.name}
-//       </span>
-//       <p className="text-slate-500 ml-4 text-sm">
-//         {review.createdAt.slice(0, 10)}
-//       </p>
-//     </div>
-//   </div>
-
-//   <div className="inline-block">{review.review}</div>
-// </div> <div className="mt-5">

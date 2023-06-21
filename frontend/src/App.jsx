@@ -15,15 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import PlacePage from "./pages/PlacePage";
 import PagenotFound from "./pages/PagenotFound";
 import BookingsPage from "./pages/BookingsPage";
-import BookingPage from "./pages/ReservationDetailPage";
-
 import MyAccount from "./pages/ProfilePage";
 import ReservationDetailPage from "./pages/ReservationDetailPage";
 import MyPlaces from "./components/MyPlaces/MyPlaces";
 import ReservationPages from "./pages/ReservationPage";
-import AdminPage from "./pages/AdminPage";
-import { Dashboard } from "@mui/icons-material";
-import Places from "./components/Dashboard/Places";
 
 axios.defaults.baseURL = "http://localhost:5000/api/v1/";
 const URL = "http://localhost:5000/api/v1/users/profile";
@@ -53,31 +48,21 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
-        {console.log("fromApp", user)}
+        <Route path="/" element={<Layout />}>
+          <Route index path="/" element={<HomePage />} />
+          <Route path="/places/:id" element={<PlacePage />}></Route>
 
-        {user && user.isAdmin ? (
-          <Route>
-            <Route path="/" element={<AdminPage />}>
-              <Route path="/users" element={<Places />}></Route>
-              <Route path="/places" element={<AdminPage />}></Route>
-              <Route path="/analytics" element={<AdminPage />}></Route>
-            </Route>
-          </Route>
-        ) : (
-          <Route path="/" element={<Layout />}>
-            <Route index path="/" element={<HomePage />} />
-            <Route path="/places/:id" element={<PlacePage />}></Route>
+          <Route path="/forgetPassword" element={<BookingsPage />} />
+          <Route path="/reservations" element={<ReservationPages />} />
+          <Route path="/hostplace" element={<MyPlaces />} />
+          <Route path="/profile" element={<MyAccount />} />
+          <Route path="/bookings" element={<BookingsPage />} />
+          <Route
+            path="/reservation/:id"
+            element={<ReservationDetailPage />}
+          ></Route>
+        </Route>
 
-            <Route path="/forgetPassword" element={<BookingsPage />} />
-            <Route path="/reservations" element={<ReservationPages />} />
-            <Route path="/hostplace" element={<MyPlaces />} />
-            <Route path="/profile" element={<MyAccount />} />
-            <Route path="/bookings" element={<BookingsPage />} />
-            <Route
-              path="/reservation/:id"
-              element={<ReservationDetailPage />}></Route>
-          </Route>
-        )}
         <Route path="*" element={<PagenotFound />} />
       </Routes>
     </CookiesProvider>

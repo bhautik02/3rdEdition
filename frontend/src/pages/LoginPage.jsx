@@ -51,14 +51,6 @@ const LoginPage = () => {
             }}
           />
           <button className="primary">login</button>
-          {/* <div className="text-center py-2 text-gray-500">
-            Don't have account?{" "} */}
-          <Link
-            to="/forgetPassword"
-            className="flex mt-2 underline text-primary justify-center">
-            Forget password
-          </Link>
-          {/* </div> */}
           <div className="text-center py-2 text-gray-500">
             Don't have account?{" "}
             <Link to="/register" className="underline text-black">

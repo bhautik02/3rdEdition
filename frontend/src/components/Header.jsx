@@ -18,7 +18,6 @@ import { SiGooglehome } from "react-icons/si";
 import { userLogoutAsync } from "../store/user";
 
 const pages = ["HostPlace", "Bookings", "Reservations", "Profile"];
-// const settings = ["Login", "Logout"];
 
 function Header() {
   const { user } = useSelector((state) => state.user);
@@ -36,6 +35,7 @@ function Header() {
   };
 
   const handleCloseNavMenu = () => {
+    console.log("handleCloseNavMenu ---- >");
     setAnchorElNav(null);
   };
 
@@ -46,6 +46,7 @@ function Header() {
   const logoutHandler = () => {
     dispatch(userLogoutAsync());
     navigate("/");
+    setAnchorElUser(null);
   };
 
   const activeClassName = ({ isActive }) =>
@@ -60,11 +61,13 @@ function Header() {
             color: "black",
             boxShadow: "none",
             // marginLeft: "5px",
-          }}>
+          }}
+        >
           <Container maxWidth="xl">
             <Toolbar
               disableGutters
-              sx={{ marginLeft: "-135px", marginRight: "-135px" }}>
+              sx={{ marginLeft: "-135px", marginRight: "-135px" }}
+            >
               <div className="mr-4">
                 <SiGooglehome />
               </div>
@@ -81,8 +84,9 @@ function Header() {
                   // letterSpacing: ".3rem",
                   color: "inherit",
                   textDecoration: "none",
-                }}>
-                Accomodo
+                }}
+              >
+                FeelsHome
               </Typography>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -92,7 +96,8 @@ function Header() {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color="inherit">
+                  color="inherit"
+                >
                   <MenuIcon />
                 </IconButton>
                 <Menu
@@ -111,7 +116,8 @@ function Header() {
                   onClose={handleCloseNavMenu}
                   sx={{
                     display: { xs: "block", md: "none" },
-                  }}>
+                  }}
+                >
                   {pages.map((page) => (
                     <div key={Math.random()}>
                       <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -127,7 +133,8 @@ function Header() {
                   <NavLink
                     to={user ? `/${page.toLowerCase()}` : "/login"}
                     key={page}
-                    className={activeClassName}>
+                    className={activeClassName}
+                  >
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}
@@ -136,11 +143,8 @@ function Header() {
                         color: "black",
                         display: "block",
                         mx: "10px",
-                        // "&:hover": {
-                        //   backgroundColor: "#F5385D",
-                        //   color: "white",
-                        // },
-                      }}>
+                      }}
+                    >
                       {page}
                     </Button>
                   </NavLink>
@@ -155,7 +159,8 @@ function Header() {
                     textAlign: "center",
                     margin: "10px",
                     fontSize: "16px",
-                  }}>
+                  }}
+                >
                   {user?.name}
                   {console.log("ftyguhijo", user)}
                 </Typography>
@@ -180,7 +185,8 @@ function Header() {
                     horizontal: "right",
                   }}
                   open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}>
+                  onClose={handleCloseUserMenu}
+                >
                   {user ? (
                     <MenuItem onClick={logoutHandler} key={Math.random()}>
                       <Typography textAlign="center">Logout</Typography>
@@ -189,7 +195,8 @@ function Header() {
                     <Link to={`/login`}>
                       <MenuItem
                         onClick={handleCloseUserMenu}
-                        key={Math.random()}>
+                        key={Math.random()}
+                      >
                         <Typography textAlign="center">Login</Typography>
                       </MenuItem>
                     </Link>

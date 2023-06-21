@@ -38,7 +38,7 @@ export default function MyDatePicker({ setDate }) {
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
           label="Basic date picker"
-          // disablePast
+          disablePast
           maxDate={dayjs(daysss.$d)}
           shouldDisableDate={shouldDisable}
           onChange={dateChangeHandler}

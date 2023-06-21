@@ -5,26 +5,37 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Filters from "../components/Filters";
 import DataNotFound from "../components/DataNotFound";
-import BasicPagination from "../components/Pagination";
 import { Pagination } from "@mui/material";
 import { AiTwotoneStar } from "react-icons/ai";
-import Dashboard from "../components/Dashboard/Dashboard";
+import LoadingSpinner from "./../utils/LoadingSpinner";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
   const allplaces = useSelector((state) => state.place.allPlaces);
+  const { loading } = useSelector((state) => state.place);
+  const totalPages = useSelector((state) => state.place.totalPages);
   const dispatch = useDispatch();
 
-  const handlePageChange = (event) => {
-    setPage(event.target.value);
+  console.log("loading", loading);
 
-    dispatch(getAllPlacesAsync({ setPage }));
+  const handlePageChange = (event, page) => {
+    // setPage(event.target.value);
+
+    console.log(page);
+
+    setPage(+page);
+    // dispatch(getAllPlacesAsync({ setPage }));
   };
 
   useEffect(() => {
-    dispatch(getAllPlacesAsync({}));
+    console.log("useEffect called.....", page);
+    dispatch(getAllPlacesAsync({ page }));
     // eslint-disable-next-line
   }, [page]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     // <div className="bg-gray-950 text-white ">
@@ -42,7 +53,8 @@ const HomePage = () => {
                   <Link
                     className="col-span-1 cursor-pointer group"
                     to={`/places/${place._id}`}
-                    key={place._id}>
+                    key={place._id}
+                  >
                     <div className="flex flex-col gap-2 w-full">
                       <div className="aspect-square w-full relative overflow-hidden rounded-xl ">
                         <img
@@ -79,13 +91,12 @@ const HomePage = () => {
               })}
             </div>
           </div>
-          {/* <Dashboard /> */}
         </div>
       )}
 
       <div className="mb-10 flex justify-center">
         <Pagination
-          count={5}
+          count={totalPages}
           color="secondary"
           page={page}
           onChange={handlePageChange}
@@ -96,9 +107,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-/* <iframe
-        title="kedar"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228225.89119998863!2d-82.1359357856101!3d26.64753629985287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88db44a7e78016f5:0xafd1a4163a9b6ff2!2sCape Coral, FL, USA!5e0!3m2!1sen!2sbd!4v1616562014411!5m2!1sen!2sbd"
-        allowfullscreen="true"
-        loading="lazy"></iframe> */
-/* <MapContainer /> */

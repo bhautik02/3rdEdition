@@ -4,10 +4,27 @@ const AppError = require("../utils/appError");
 
 const getReservations = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
+  // const page = parseInt(req.query.page) * 1 || 0;
+  // console.log(page);
+  // const limit = req.params.rowsPerPage * 1 || 5;
+  // const skip = page * limit;
+
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 1 || 10;
+  const skip = (page - 1) * limit;
+
+  const totalReservations = await Booking.countDocuments({
+    place: placeId,
+    isDeleted: false,
+  });
+
   const reservations = await Booking.find({
     place: placeId,
     isDeleted: false,
-  }).select("name placeName phone checkIn checkOut price numberOfGuests");
+  })
+    .skip(skip)
+    .limit(limit)
+    .select("name placeName phone checkIn checkOut price numberOfGuests");
 
   if (!reservations) {
     return next(new AppError("You not have any Reservations!", 404));
@@ -15,8 +32,8 @@ const getReservations = CatchAsync(async (req, res, next) => {
 
   res.status(201).json({
     status: "success",
-    length: reservations.length,
     reservations,
+    totalReservations,
   });
 });
 

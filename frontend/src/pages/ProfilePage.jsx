@@ -40,47 +40,29 @@ export default function ProfilePage() {
   return (
     <div className="flex gap-20 mt-10 justify-center mx-80">
       <div className="">
-        <div className="shadow-2xl shadow-black-300 h-64 w-96  rounded-2xl">
-          <div className="grid grid-cols-3 ">
-            <div className="flex col-span-2 bg-lightblue p-8 justify-center">
-              <div>
-                <label className="relative">
-                  <input
-                    className="absolute justify-center w-full h-full opacity-0"
-                    type="file"
-                    accept="img/*"
-                    name="profile"
-                    onChange={changeProfileHandler}
-                  />
+        <div className="shadow-2xl shadow-black-300 h-64 w-80  rounded-2xl">
+          <div className="flex col-span-2 bg-lightblue p-8 justify-center">
+            <div>
+              <label className="relative">
+                <input
+                  className="absolute justify-center w-full h-full opacity-0"
+                  type="file"
+                  accept="img/*"
+                  name="profile"
+                  onChange={changeProfileHandler}
+                />
+                <div>
                   <img
                     className="h-36 w-36 object-cover rounded-full"
                     src={user?.profile}
                     alt="place"
                   />
-                </label>
-                <h2 className="flex font-bold mt-2 text-3xl justify-center">
-                  {user && user?.name.split(" ")[0]}
-                </h2>
-
-                <p></p>
-              </div>
+                </div>
+              </label>
+              <h2 className="flex font-bold mt-2 text-3xl justify-center">
+                {user && user?.name.split(" ")[0]}
+              </h2>
             </div>
-            {/* <div className="col-span-1 bg-lightblue ">
-              <div className="flex-col items-center my-4 mt-14">
-                <div className="">
-                  <p className="text-2xl font-semibold">278</p>
-                  <p className="text-xs">Reviews</p>
-                  <hr className="my-4" />
-                </div>
-                <div className="">
-                  <div className="flex">
-                    <p className=" text-2xl font-semibold">4.72</p>
-                    <AiTwotoneStar className="ml-2 mt-2" />
-                  </div>
-                  <p className="text-xs">Rating</p>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

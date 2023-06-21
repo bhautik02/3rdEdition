@@ -12,6 +12,7 @@ import TablePagination from "@mui/material/TablePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getAllReservationsAsync } from "../store/reservation";
+import { useEffect } from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,24 +37,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function ReservationDetailPage() {
   const dispatch = useDispatch();
   const { allReservations } = useSelector((state) => state.reservation);
+  const { totalReservations } = useSelector((state) => state.reservation);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const { id: placeId } = useParams();
 
   const handleChangePage = (event, newPage) => {
+    console.log("handleChangePage----->", newPage);
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
+    console.log("-----> handleChangeRowsPerPage ---->", event.target.value);
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  React.useEffect(() => {
-    dispatch(getAllReservationsAsync(placeId));
+  useEffect(() => {
+    dispatch(getAllReservationsAsync({ placeId, page, rowsPerPage }));
     // eslint-disable-next-line
-  }, [getAllReservationsAsync]);
+  }, [page, rowsPerPage]);
 
   return (
     <>
@@ -71,7 +74,8 @@ export default function ReservationDetailPage() {
               marginLeft: "350px",
               marginRight: "350px",
               marginTop: "20px",
-            }}>
+            }}
+          >
             <TableContainer component={Paper} style={{ marginBottom: "5%" }}>
               <Table aria-label="customized table">
                 <TableHead>
@@ -87,7 +91,6 @@ export default function ReservationDetailPage() {
                       CheckOut Date
                     </StyledTableCell>
                     <StyledTableCell align="right">Total Price</StyledTableCell>
-                    <StyledTableCell align="right">contact</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -111,17 +114,14 @@ export default function ReservationDetailPage() {
                       <StyledTableCell align="right">
                         {reservation.price}
                       </StyledTableCell>
-                      <StyledTableCell align="right">
-                        <button>b</button>
-                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
               </Table>
               <TablePagination
-                rowsPerPageOptions={[2, 4, 6]}
+                rowsPerPageOptions={[5, 10, 15]}
                 component="paper"
-                count={allReservations.length}
+                count={totalReservations}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
@@ -131,14 +131,24 @@ export default function ReservationDetailPage() {
             <div className="flex -mt-10 mb-4 justify-center">
               <Link
                 to={"/reservations"}
-                className="flex gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center">
+                className="flex gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center"
+              >
                 go to all reservations
               </Link>
             </div>
           </Box>
         </>
       ) : (
-        <div>You don't have reservation for this place</div>
+        <div className="flex flex-col items-center justify-center h-[75vh]">
+          <h1 className="text-2xl font-medium">Oops! No Reservation found.</h1>
+          {/* <p className="text-md mt-2">This place has no reservations.</p> */}
+          <Link
+            to={"/reservations"}
+            className="flex mt-4 gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center"
+          >
+            go to all reservations
+          </Link>
+        </div>
       )}
     </>
   );
