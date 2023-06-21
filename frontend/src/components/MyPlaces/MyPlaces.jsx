@@ -123,7 +123,9 @@ const MyPlaces = (props) => {
                         <div className="font-semibold text-lg">
                           {place?.address}
                         </div>
-                        <div className="font-light text-neutral-500">Beach</div>
+                        <div className="font-light text-neutral-500">
+                          {place?.category}
+                        </div>
                         <div className="flex flex-row items-center gap-1">
                           <div className="font-semibold">{place?.price} ₹</div>
                           <div className="font-light">night</div>

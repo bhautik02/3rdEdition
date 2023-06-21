@@ -87,6 +87,7 @@ const FirstStep = forwardRef((props, ref) => {
           required
           name="category"
           select={category}
+          value={category}
           onChange={(event) => setCategory(event.target.value)}
           className="w-full h-10 rounded-2xl bg-white pl-4 border-gray-200"
         >

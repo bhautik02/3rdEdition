@@ -169,33 +169,6 @@ export default function HostingSlider(props) {
             </Box>
 
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{
-                  mr: 1,
-                  color: "#F5385D",
-                  ":hover": {
-                    bgcolor: "#F5385D",
-                    color: "white",
-                  },
-                }}
-              >
-                Back
-              </Button>
-              <Button
-                onClick={handleNext}
-                sx={{
-                  mr: 1,
-                  color: "#F5385D",
-                  ":hover": {
-                    bgcolor: "#F5385D",
-                    color: "white",
-                  },
-                }}
-              >
-                Next
-              </Button>
               <Box sx={{ flex: "1 1 auto" }} />
 
               {activeStep !== steps.length &&
