@@ -38,6 +38,34 @@ export const getAllPlacesDashAsync = createAsyncThunk(
   }
 );
 
+export const deleteUserDashAsync = createAsyncThunk(
+  "dash/deleteUserDash",
+  async (userId) => {
+    try {
+      const response = await axios.patch(`admin/users/${userId}`);
+      // const deletedHostedPlace = response.data.deletedHostedPlace;
+      toast.success("User Blocked Successfully.");
+      return userId;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+);
+
+export const deletePlaceDashAsync = createAsyncThunk(
+  "dash/deletePlaceDash",
+  async (placeId) => {
+    try {
+      const response = await axios.patch(`admin/places/${placeId}`);
+      // const deletedHostedPlace = response.data.deletedHostedPlace;
+      toast.success("Place Blocked Successfully.");
+      return placeId;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+);
+
 const InitialBookingState = {
   allUsers: null,
   totalUsers: 0,
@@ -74,6 +102,35 @@ const dashSlice = createSlice({
         state.totalPlaces = action.payload.totalPlaces;
       })
       .addCase(getAllPlacesDashAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deleteUserDashAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteUserDashAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allUsers = state.allUsers.filter((user) => {
+          if (user._id !== action.payload) return user;
+        });
+      })
+      .addCase(deleteUserDashAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deletePlaceDashAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deletePlaceDashAsync.fulfilled, (state, action) => {
+        state.loading = false;
+
+        state.allPlaces = state.allPlaces.filter((place) => {
+          if (place._id !== action.payload) return place;
+        });
+      })
+      .addCase(deletePlaceDashAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

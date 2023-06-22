@@ -74,8 +74,7 @@ export default function ReservationDetailPage() {
               marginLeft: "350px",
               marginRight: "350px",
               marginTop: "20px",
-            }}
-          >
+            }}>
             <TableContainer component={Paper} style={{ marginBottom: "5%" }}>
               <Table aria-label="customized table">
                 <TableHead>
@@ -106,10 +105,10 @@ export default function ReservationDetailPage() {
                         {reservation.numberOfGuests}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {reservation.checkOut.split("T")[0]}
+                        {reservation.checkIn.split("T")[0]}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {reservation.checkIn.split("T")[0]}
+                        {reservation.checkOut.split("T")[0]}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {reservation.price}
@@ -131,8 +130,7 @@ export default function ReservationDetailPage() {
             <div className="flex -mt-10 mb-4 justify-center">
               <Link
                 to={"/reservations"}
-                className="flex gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center"
-              >
+                className="flex gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center">
                 go to all reservations
               </Link>
             </div>
@@ -144,8 +142,7 @@ export default function ReservationDetailPage() {
           {/* <p className="text-md mt-2">This place has no reservations.</p> */}
           <Link
             to={"/reservations"}
-            className="flex mt-4 gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center"
-          >
+            className="flex mt-4 gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center">
             go to all reservations
           </Link>
         </div>

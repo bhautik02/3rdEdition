@@ -7,11 +7,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllUsersDashAsync } from "../../store/dashboard";
+import {
+  deleteUserDashAsync,
+  getAllUsersDashAsync,
+} from "../../store/dashboard";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,6 +46,10 @@ export default function Users() {
   const handleChangePage = (event, newPage) => {
     console.log("handleChangePage----->", newPage);
     setPage(newPage);
+  };
+
+  const userDeleteHandler = (id) => {
+    dispatch(deleteUserDashAsync(id));
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -81,6 +88,7 @@ export default function Users() {
                     <StyledTableCell align="right">Gender</StyledTableCell>
                     <StyledTableCell align="left">Phone</StyledTableCell>
                     <StyledTableCell align="left">Joined in</StyledTableCell>
+                    <StyledTableCell align="left">Action</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -115,6 +123,20 @@ export default function Users() {
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {user?.createdAt.split("T")[0]}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        <Button
+                          onClick={userDeleteHandler.bind(null, user?._id)}
+                          sx={{
+                            bgcolor: "#FFCCCB",
+                            color: "red",
+                            "&:hover": {
+                              backgroundColor: "#F5385D",
+                              color: "white",
+                            },
+                          }}>
+                          Block
+                        </Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

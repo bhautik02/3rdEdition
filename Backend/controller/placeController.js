@@ -29,7 +29,9 @@ const getYourHostedPlace = CatchAsync(async (req, res, next) => {
   const hostedPlace = await Place.find({
     owner: ownerId,
     isDeleted: false,
-  }).select("-__v");
+  })
+    .select("-__v")
+    .sort({ createdAt: -1 });
 
   if (!hostedPlace) {
     return next(new AppError("Place not found!", 404));
@@ -62,7 +64,10 @@ const getAllHostedplaces = CatchAsync(async (req, res, next) => {
   const hostedPlace = await Place.find(obj)
     .skip(skip)
     .limit(limit)
-    .select("-__v");
+    .select("-__v")
+    .sort({
+      createdAt: -1,
+    });
 
   if (!hostedPlace) {
     return next(new AppError("Places not found!", 404));

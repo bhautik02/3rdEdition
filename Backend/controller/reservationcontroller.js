@@ -19,7 +19,10 @@ const getReservations = CatchAsync(async (req, res, next) => {
   })
     .skip(skip)
     .limit(limit)
-    .select("name placeName phone checkIn checkOut price numberOfGuests");
+    .select("name placeName phone checkIn checkOut price numberOfGuests")
+    .sort({
+      checkIn: -1,
+    });
 
   if (!reservations) {
     return next(new AppError("You not have any Reservations!", 404));

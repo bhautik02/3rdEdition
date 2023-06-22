@@ -7,11 +7,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllPlacesDashAsync, getAllUsersAsync } from "../../store/dashboard";
+import {
+  deletePlaceDashAsync,
+  getAllPlacesDashAsync,
+  getAllUsersAsync,
+} from "../../store/dashboard";
 import { AiTwotoneStar } from "react-icons/ai";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -46,6 +50,10 @@ export default function Places() {
     setPage(newPage);
   };
 
+  const placeDeleteHandler = (id) => {
+    dispatch(deletePlaceDashAsync(id));
+  };
+
   const handleChangeRowsPerPage = (event) => {
     console.log("-----> handleChangeRowsPerPage ---->", event.target.value);
     setRowsPerPage(+event.target.value);
@@ -68,7 +76,7 @@ export default function Places() {
               marginTop: "20px",
             }}>
             <div className="flex mt-10 justify-center mb-4">
-              <p className="text-3xl ">All Users</p>
+              <p className="text-3xl ">All Places</p>
             </div>
             <TableContainer component={Paper} style={{ marginBottom: "5%" }}>
               <Table aria-label="customized table">
@@ -85,6 +93,7 @@ export default function Places() {
                     <StyledTableCell align="right">OwnerPhone</StyledTableCell>
                     <StyledTableCell align="left">OwnerEmail</StyledTableCell>
                     <StyledTableCell align="left">Joined in</StyledTableCell>
+                    <StyledTableCell align="left">Action</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -95,7 +104,7 @@ export default function Places() {
                           <img
                             src={place?.photo[0]}
                             alt="profile"
-                            className="w-12 h-12 object-cover rounded-full"
+                            className="w-10 h-10 object-cover rounded-full"
                           />
                         </div>
                       </StyledTableCell>
@@ -115,7 +124,7 @@ export default function Places() {
                         {place?.price}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        <AiTwotoneStar className="inline h-3 w-3 -mt-1" />{" "}
+                        <AiTwotoneStar className="inline h-3 w-3 -mt-1" />
                         {place.totalRatings > 1
                           ? (place.totalRatings / place.numberOfReview).toFixed(
                               2
@@ -133,6 +142,20 @@ export default function Places() {
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {place?.createdAt.split("T")[0]}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        <Button
+                          onClick={placeDeleteHandler.bind(null, place?._id)}
+                          sx={{
+                            bgcolor: "#FFCCCB",
+                            color: "red",
+                            "&:hover": {
+                              backgroundColor: "#F5385D",
+                              color: "white",
+                            },
+                          }}>
+                          Block
+                        </Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

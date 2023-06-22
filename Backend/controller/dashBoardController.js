@@ -66,7 +66,49 @@ const getAllPlaces = CatchAsync(async (req, res, next) => {
   });
 });
 
+const deleteUserDash = CatchAsync(async (req, res, next) => {
+  const userId = req.params.id;
+  console.log(userId);
+  const deletedUser = await User.findByIdAndUpdate(
+    userId,
+    { isDeleted: true },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  console.log(deletedUser);
+  if (!deletedUser) {
+    return next(new AppError("Place not deleted!", 404));
+  }
+
+  res.status(204).json(null);
+});
+
+const deletePlaceDash = CatchAsync(async (req, res, next) => {
+  const placeId = req.params.id;
+  console.log(placeId);
+  const deletedPlace = await Place.findByIdAndUpdate(
+    placeId,
+    { isDeleted: true },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  console.log(deletedPlace);
+  if (!deletedPlace) {
+    return next(new AppError("Place not deleted!", 404));
+  }
+
+  res.status(204).json(null);
+});
+
 module.exports = {
   getAllUsers,
   getAllPlaces,
+  deleteUserDash,
+  deletePlaceDash,
 };

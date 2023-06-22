@@ -46,12 +46,7 @@ function App() {
 
   return (
     <CookiesProvider>
-      <ToastContainer
-        theme="dark"
-        autoClose={2000}
-        position="bottom-left"
-        hideProgressBar
-      />
+      <ToastContainer theme="dark" autoClose={2000} hideProgressBar />
       <ProSidebarProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />}></Route>
