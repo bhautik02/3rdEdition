@@ -107,7 +107,7 @@ export default function BookingWidget({ place }) {
             };
 
             dispatch(bookPlaceAsync(formData));
-            navigate("/bookings");
+            navigate("/");
           }
         } catch (error) {
           console.log(error);

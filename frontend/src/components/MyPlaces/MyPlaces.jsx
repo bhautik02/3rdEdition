@@ -9,6 +9,7 @@ import {
   getAllHostedPlacesByUserAsync,
 } from "../../store/addPlace";
 import DataNotFound from "../DataNotFound";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 
 const style = {
   position: "absolute",
