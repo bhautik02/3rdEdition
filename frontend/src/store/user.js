@@ -6,11 +6,17 @@ export const userRegisterAsync = createAsyncThunk(
   "user/userRegister",
   async ({ name, email, password }) => {
     try {
-      const response = await axios.post(`users/signup`, {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `users/signup`,
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       toast.success("user created");
       const user = response.data.user;
       return user;

@@ -8,35 +8,31 @@ import DataNotFound from "../components/DataNotFound";
 import { Pagination } from "@mui/material";
 import { AiTwotoneStar } from "react-icons/ai";
 import LoadingSpinner from "./../utils/LoadingSpinner";
+import useDebounce from "../components/Debounce";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
   const [city, setCity] = useState("");
+  const debouncedValue = useDebounce(city, 500);
+
   const allplaces = useSelector((state) => state.place.allPlaces);
   const { loading } = useSelector((state) => state.place);
   const totalPages = useSelector((state) => state.place.totalPages);
   const dispatch = useDispatch();
 
-  console.log("loading", loading);
-
   const handlePageChange = (event, page) => {
-    // setPage(event.target.value);
-
-    console.log(page);
-
     setPage(+page);
-    // dispatch(getAllPlacesAsync({ setPage }));
   };
+
   const searchHandler = (event) => {
     event.preventDefault();
     setCity(event.target.value);
-    console.log(city);
   };
 
   useEffect(() => {
     dispatch(getAllPlacesAsync({ page, city }));
     // eslint-disable-next-line
-  }, [city]);
+  }, [debouncedValue]);
 
   useEffect(() => {
     console.log("useEffect called.....", page);
