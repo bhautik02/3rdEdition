@@ -11,6 +11,7 @@ import LoadingSpinner from "./../utils/LoadingSpinner";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
+  const [city, setCity] = useState("");
   const allplaces = useSelector((state) => state.place.allPlaces);
   const { loading } = useSelector((state) => state.place);
   const totalPages = useSelector((state) => state.place.totalPages);
@@ -25,6 +26,11 @@ const HomePage = () => {
 
     setPage(+page);
     // dispatch(getAllPlacesAsync({ setPage }));
+  };
+  const searchHandler = (event) => {
+    event.preventDefault();
+    setCity(event.target.value);
+    console.log(city);
   };
 
   useEffect(() => {
@@ -41,7 +47,16 @@ const HomePage = () => {
     // <div className="bg-gray-950 text-white ">
     <div>
       <Filters />
-      {console.log("grojgj", allplaces)}
+      <div className="flex justify-center">
+        <div className="mt-4 w-[100vh]">
+          <input
+            type="text"
+            placeholder="search for city"
+            value={city}
+            onChange={searchHandler}></input>
+        </div>
+      </div>
+      {/* {console.log("grojgj", allplaces)} */}
       {!allplaces || allplaces.length === 0 ? (
         <DataNotFound />
       ) : (
@@ -53,8 +68,7 @@ const HomePage = () => {
                   <Link
                     className="col-span-1 cursor-pointer group"
                     to={`/places/${place._id}`}
-                    key={place._id}
-                  >
+                    key={place._id}>
                     <div className="flex flex-col gap-2 w-full">
                       <div className="aspect-square w-full relative overflow-hidden rounded-xl ">
                         <img

@@ -12,6 +12,7 @@ const reservation = require("./routes/reservationRoute");
 const review = require("./routes/reviewRoute");
 const errorController = require("./controller/errorController");
 const payment = require("./routes/paymentRoute");
+const admin = require("./routes/dashboardRoute");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +33,7 @@ app.use("/api/v1/book", booking);
 app.use("/api/v1", reservation);
 app.use("/api/v1/review", review);
 app.use("/api/v1", payment);
+app.use("/api/v1/admin", admin);
 
 app.use(errorController);
 

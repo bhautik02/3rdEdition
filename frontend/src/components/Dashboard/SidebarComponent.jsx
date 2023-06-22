@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
+import { FaAirbnb } from "react-icons/fa";
 
 const SidebarComponent = () => {
   const { palette } = useTheme();
@@ -43,7 +44,7 @@ const SidebarComponent = () => {
               {collapsed ? (
                 <Avatar alt="logo dashboard" src={"logodash"} />
               ) : (
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Box sx={{ display: "flex-column", justifyContent: "center" }}>
                   <img
                     style={{
                       width: "100px",
@@ -51,9 +52,12 @@ const SidebarComponent = () => {
                       textAlign: "center",
                       transition: "all ease-out .5s",
                     }}
-                    src={"logoDashboard"}
-                    alt="logo dashboard"
+                    src={
+                      "https://cdn.icon-icons.com/icons2/2845/PNG/512/airbnb_logo_icon_181363.png"
+                    }
+                    alt="logo"
                   />
+                  <div className="ml-2">FeelsHome</div>
                 </Box>
               )}
             </Box>

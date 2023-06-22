@@ -51,7 +51,7 @@ function App() {
       <ToastContainer
         theme="dark"
         autoClose={2000}
-        // position="bottom-right"
+        position="bottom-left"
         hideProgressBar
       />
       <ProSidebarProvider>

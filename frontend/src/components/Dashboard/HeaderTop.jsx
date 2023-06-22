@@ -9,7 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useProSidebar } from "react-pro-sidebar";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: "black",
+  backgroundColor: "white",
+  color: "black",
 }));
 
 const HeaderTop = () => {
@@ -33,7 +34,7 @@ const HeaderTop = () => {
             component="div"
             color="inherit"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
-            Dashboard
+            Admin Dashboard
           </Typography>
         </Toolbar>
       </StyledAppBar>

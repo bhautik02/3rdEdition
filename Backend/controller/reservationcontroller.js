@@ -4,11 +4,6 @@ const AppError = require("../utils/appError");
 
 const getReservations = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
-  // const page = parseInt(req.query.page) * 1 || 0;
-  // console.log(page);
-  // const limit = req.params.rowsPerPage * 1 || 5;
-  // const skip = page * limit;
-
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 10;
   const skip = (page - 1) * limit;

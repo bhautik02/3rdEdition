@@ -44,7 +44,12 @@ const getYourHostedPlace = CatchAsync(async (req, res, next) => {
 
 const getAllHostedplaces = CatchAsync(async (req, res, next) => {
   let category = req.body.category;
+  let search = req.query.search;
   let obj = category ? { isDeleted: false, category } : { isDeleted: false };
+
+  if (search) {
+    obj = { ...obj, address: { $in: search } };
+  }
 
   const page = parseInt(req.query.page) || 1; // Current page number
   console.log(page);
