@@ -6,11 +6,10 @@ import { CookiesProvider } from "react-cookie";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import axios from "axios";
-import AccountPage from "./pages/AccountPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
-import { fetchUserAsync, userActions } from "./store/user";
+import { fetchUserAsync } from "./store/user";
 import { useDispatch, useSelector } from "react-redux";
 import PlacePage from "./pages/PlacePage";
 import PagenotFound from "./pages/PagenotFound";
@@ -19,9 +18,19 @@ import MyAccount from "./pages/ProfilePage";
 import ReservationDetailPage from "./pages/ReservationDetailPage";
 import MyPlaces from "./components/MyPlaces/MyPlaces";
 import ReservationPages from "./pages/ReservationPage";
+import Places from "./components/Dashboard/Places";
+import LayoutDash from "./components/Dashboard/LayoutDash";
+import { ProSidebarProvider } from "react-pro-sidebar";
+import Users from "./components/Dashboard/Users";
+import Analytics from "./components/Dashboard/Analytics";
 
 axios.defaults.baseURL = "http://localhost:5000/api/v1/";
-const URL = "http://localhost:5000/api/v1/users/profile";
+
+const PlacesDash = LayoutDash(Places);
+const UsersDash = LayoutDash(Users);
+const AnalyticsDash = LayoutDash(Analytics);
+// const UserJobsHistoryHOC = LayoutDash(UserJobsHistory);
+// const UserInfoDashboardHOC = LayoutDash(UserInfoDashboard);
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -45,50 +54,38 @@ function App() {
         // position="bottom-right"
         hideProgressBar
       />
-      <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/" element={<Layout />}>
-          <Route index path="/" element={<HomePage />} />
-          <Route path="/places/:id" element={<PlacePage />}></Route>
+      <ProSidebarProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+          {console.log("fromApp", user)}
 
-          <Route path="/forgetPassword" element={<BookingsPage />} />
-          <Route path="/reservations" element={<ReservationPages />} />
-          <Route path="/hostplace" element={<MyPlaces />} />
-          <Route path="/profile" element={<MyAccount />} />
-          <Route path="/bookings" element={<BookingsPage />} />
-          <Route
-            path="/reservation/:id"
-            element={<ReservationDetailPage />}
-          ></Route>
-        </Route>
+          {user && user.isAdmin ? (
+            <Route>
+              <Route path="/" element={<AnalyticsDash />}></Route>
+              <Route path="/users" element={<UsersDash />}></Route>
+              <Route path="/places" element={<PlacesDash />}></Route>
+            </Route>
+          ) : (
+            <Route path="/" element={<Layout />}>
+              <Route index path="/" element={<HomePage />} />
+              <Route path="/places/:id" element={<PlacePage />}></Route>
 
-        <Route path="*" element={<PagenotFound />} />
-      </Routes>
+              <Route path="/forgetPassword" element={<BookingsPage />} />
+              <Route path="/reservations" element={<ReservationPages />} />
+              <Route path="/hostplace" element={<MyPlaces />} />
+              <Route path="/profile" element={<MyAccount />} />
+              <Route path="/bookings" element={<BookingsPage />} />
+              <Route
+                path="/reservation/:id"
+                element={<ReservationDetailPage />}></Route>
+            </Route>
+          )}
+          <Route path="*" element={<PagenotFound />} />
+        </Routes>
+      </ProSidebarProvider>
     </CookiesProvider>
   );
 }
 
 export default App;
-
-/* //////////////////////////////////////////////// 
-          {/* <Route path="/account/myAccount" element={<MyAccount />} />
-          <Route path="/account/liked" element={<MyAccount />} />
-          <Route path="/account/:param" element={<AccountPage />}></Route>
-          <Route path="/account/bookings/:id" element={<BookingPage />}></Route>
-          
-          <Route
-            path="/reservation/:id"
-            element={<ReservationDetailPage />}></Route> 
-          {/* /account/bookings/${bookingData._id} 
-          {/* <Route path="/account/:param/:action" element={<AccountPage />}></Route> 
-          {/* <Route
-          path="/account/:param"
-          element={
-            user ? <AccountPage /> : <Navigate replace to="/login" />
-          }></Route>
-        <Route
-          path="/account/:param/:action"
-          element={
-            user ? <AccountPage /> : <Navigate replace to="/login" />
-          }></Route> */

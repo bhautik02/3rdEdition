@@ -22,8 +22,6 @@ import LoginIcon from "@mui/icons-material/Login";
 const SidebarComponent = () => {
   const { palette } = useTheme();
   const { collapsed } = useProSidebar();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // const logOut = () => {
   //   navigate("/");
