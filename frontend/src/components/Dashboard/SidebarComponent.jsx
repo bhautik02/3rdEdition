@@ -7,7 +7,8 @@ import {
   useProSidebar,
 } from "react-pro-sidebar";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import { IoMdAnalytics } from "react-icons/io";
+import { HiUsers } from "react-icons/hi";
 import { Box, useTheme } from "@mui/material";
 import WorkIcon from "@mui/icons-material/Work";
 import CategoryIcon from "@mui/icons-material/Category";
@@ -18,7 +19,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
-import { FaAirbnb } from "react-icons/fa";
+import { FaAirbnb, FaPlaceOfWorship } from "react-icons/fa";
 
 const SidebarComponent = () => {
   const { palette } = useTheme();
@@ -79,24 +80,20 @@ const SidebarComponent = () => {
 
                 icon: {
                   [`&.${menuClasses.icon}`]: {
-                    color: palette.primary.main,
+                    color: "black",
                   },
                 },
               }}>
               (
               <>
-                <MenuItem component={<Link to="/" />} icon={<Person3Icon />}>
-                  <div style={{ color: "black" }}>Analytics</div>
-                </MenuItem>
-
                 <MenuItem
-                  component={<Link to="/places" />}
-                  icon={<WorkHistoryIcon />}>
+                  component={<Link to="/" />}
+                  icon={<FaPlaceOfWorship className="w-6 h-6" />}>
                   <div style={{ color: "black" }}>Host Places</div>
                 </MenuItem>
                 <MenuItem
                   component={<Link to="/users" />}
-                  icon={<Person3Icon />}>
+                  icon={<HiUsers className="w-6 h-6" />}>
                   <div style={{ color: "black" }}>All Users</div>
                 </MenuItem>
               </>

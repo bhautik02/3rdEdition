@@ -26,7 +26,7 @@ const Filters = () => {
   const dispatch = useDispatch();
 
   const filterByCategory = (category) => {
-    dispatch(getAllPlacesAsync({ category }));
+    dispatch(getAllPlacesAsync({ category, city: "" }));
   };
 
   return (

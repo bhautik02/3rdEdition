@@ -5,12 +5,15 @@ export const getAllPlacesAsync = createAsyncThunk(
   "place/getAllPlaces",
   async (Data) => {
     try {
-      const { category, page } = Data;
+      const { category, page, city } = Data;
       // console.log(setPage, jani);
-      const response = await axios.post(`place/hostPlaces?page=${page}`, {
-        // const response = await axios.post(`place/hostPlaces`, {
-        category,
-      });
+      const response = await axios.post(
+        `place/hostPlaces?page=${page}&search=${city}`,
+        {
+          // const response = await axios.post(`place/hostPlaces`, {
+          category,
+        }
+      );
       console.log(response.data);
       return response.data;
     } catch (error) {

@@ -2,15 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const getAllUsersAsync = createAsyncThunk(
+export const getAllUsersDashAsync = createAsyncThunk(
   "dash/getAllUsers",
   async ({ page, rowsPerPage }) => {
     try {
+      console.log("--------->called");
       const response = await axios.get(
         `admin/users?page=${page + 1}&limit=${rowsPerPage}`
       );
       const allUsers = response.data;
-      //   toast.success("Place booked.");
+      // toast.success("Place booked.");
+      console.log("dashboard", allUsers);
       return allUsers;
     } catch (error) {
       toast.error(error.response.data.message);
@@ -19,7 +21,7 @@ export const getAllUsersAsync = createAsyncThunk(
   }
 );
 
-export const getAllPlacesAsync = createAsyncThunk(
+export const getAllPlacesDashAsync = createAsyncThunk(
   "dash/getAllPlaces",
   async ({ page, rowsPerPage }) => {
     try {
@@ -38,6 +40,8 @@ export const getAllPlacesAsync = createAsyncThunk(
 
 const InitialBookingState = {
   allUsers: null,
+  totalUsers: 0,
+  totalPlaces: 0,
   allPlaces: null,
 };
 
@@ -47,27 +51,29 @@ const dashSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllUsersAsync.pending, (state) => {
+      .addCase(getAllUsersDashAsync.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getAllUsersAsync.fulfilled, (state, action) => {
+      .addCase(getAllUsersDashAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.allUsers = action.payload;
+        state.allUsers = action.payload.users;
+        state.totalUsers = action.payload.totalUsers;
       })
-      .addCase(getAllUsersAsync.rejected, (state, action) => {
+      .addCase(getAllUsersDashAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(getAllPlacesAsync.pending, (state) => {
+      .addCase(getAllPlacesDashAsync.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getAllPlacesAsync.fulfilled, (state, action) => {
+      .addCase(getAllPlacesDashAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.allBookings = action.payload;
+        state.allPlaces = action.payload.places;
+        state.totalPlaces = action.payload.totalPlaces;
       })
-      .addCase(getAllPlacesAsync.rejected, (state, action) => {
+      .addCase(getAllPlacesDashAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

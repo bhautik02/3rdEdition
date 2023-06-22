@@ -10,9 +10,8 @@ import Paper from "@mui/material/Paper";
 import { Box } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { getAllUsersAsync } from "../../store/dashboard";
+import { getAllUsersDashAsync } from "../../store/dashboard";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,12 +35,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Users() {
   const dispatch = useDispatch();
-  const { allReservations } = useSelector((state) => state.reservation);
-  const { totalReservations } = useSelector((state) => state.reservation);
+  const { allUsers } = useSelector((state) => state.dashboard);
+  const { totalUsers } = useSelector((state) => state.dashboard);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const { id: placeId } = useParams();
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (event, newPage) => {
     console.log("handleChangePage----->", newPage);
@@ -54,63 +51,70 @@ export default function Users() {
     setPage(0);
   };
   useEffect(() => {
-    dispatch(getAllUsersAsync({ page, rowsPerPage }));
+    dispatch(getAllUsersDashAsync({ page, rowsPerPage }));
     // eslint-disable-next-line
   }, [page, rowsPerPage]);
 
   return (
     <>
-      {/* {console.log("============", allReservations)}
-      {allReservations.length !== 0 ? (
+      {console.log("============", allUsers)}
+      {allUsers && allUsers.length !== 0 && (
         <>
-          <div className="flex justify-center  mt-10">
-            <p className="text-3xl ">Reservations of &#160;</p>
-            <p className="text-3xl  font-semibold">
-              {allReservations[0].placeName}
-            </p>
-          </div>
           <Box
             style={{
-              marginLeft: "350px",
-              marginRight: "350px",
+              marginLeft: "200px",
+              marginRight: "200px",
               marginTop: "20px",
             }}>
+            <div className="flex mt-10 justify-center mb-4">
+              <p className="text-3xl ">All Users</p>
+            </div>
             <TableContainer component={Paper} style={{ marginBottom: "5%" }}>
               <Table aria-label="customized table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell>BookBy</StyledTableCell>
+                    <StyledTableCell>profile</StyledTableCell>
+                    <StyledTableCell>Identity number</StyledTableCell>
+                    <StyledTableCell align="left">Name</StyledTableCell>
+                    <StyledTableCell align="left">Email</StyledTableCell>
+                    <StyledTableCell align="left">Address</StyledTableCell>
+                    <StyledTableCell align="right">Gender</StyledTableCell>
                     <StyledTableCell align="left">Phone</StyledTableCell>
-                    <StyledTableCell align="left">
-                      Number of Guests
-                    </StyledTableCell>
-                    <StyledTableCell align="left">CheckIn Date</StyledTableCell>
-                    <StyledTableCell align="left">
-                      CheckOut Date
-                    </StyledTableCell>
-                    <StyledTableCell align="right">Total Price</StyledTableCell>
+                    <StyledTableCell align="left">Joined in</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allReservations.map((reservation) => (
-                    <StyledTableRow key={reservation._id}>
+                  {allUsers.map((user) => (
+                    <StyledTableRow key={user._id}>
                       <StyledTableCell component="th" scope="row">
-                        {reservation.name}
+                        <div className="flex rounded-full">
+                          <img
+                            src={user?.profile}
+                            alt="profile"
+                            className="w-14 h-14 object-cover rounded-full"
+                          />
+                        </div>
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {reservation.phone}
+                        {user?._id}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {reservation.numberOfGuests}
+                        {user?.name}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {reservation.checkOut.split("T")[0]}
+                        {user?.email}
                       </StyledTableCell>
                       <StyledTableCell align="left">
-                        {reservation.checkIn.split("T")[0]}
+                        {user?.address}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {user?.gender}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {reservation.price}
+                        {user?.phone}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {user?.createdAt.split("T")[0]}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -119,32 +123,17 @@ export default function Users() {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component="paper"
-                count={totalReservations}
+                count={totalUsers}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
             </TableContainer>
-            <div className="flex -mt-10 mb-4 justify-center">
-              <Link
-                to={"/reservations"}
-                className="flex gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center">
-                go to all reservations
-              </Link>
-            </div>
+            <div className="flex -mt-10 mb-4 justify-center"></div>
           </Box>
         </>
-      ) : (
-        <div className="flex flex-col items-center justify-center h-[75vh]">
-          <h1 className="text-2xl font-medium">Oops! No Reservation found.</h1>
-          <Link
-            to={"/reservations"}
-            className="flex mt-4 gap-1 py-2 px-6 bg-primary rounded-full text-white justify-center">
-            go to all reservations
-          </Link>
-        </div>
-      )} */}
+      )}
     </>
   );
 }

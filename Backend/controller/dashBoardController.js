@@ -46,7 +46,14 @@ const getAllPlaces = CatchAsync(async (req, res, next) => {
   })
     .skip(skip)
     .limit(limit)
-    .select("-__v -password -updatedAt -isAdmin -aboutMe");
+    .select(
+      "_id title totalRatings numberOfReview category address photo price createdAt owner"
+    )
+    .populate({
+      path: "host",
+      select: "name phone email",
+    })
+    .lean();
 
   if (!places) {
     return next(new AppError("You not have any Users!", 404));

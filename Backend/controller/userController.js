@@ -36,7 +36,9 @@ const signupUser = CatchAsync(async (req, res, next) => {
 const loginUser = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  let user = await User.findOne({ email }).select("+password");
+  let user = await User.findOne({ email, isDeleted: false }).select(
+    "+password"
+  );
   if (!user) {
     return next(new AppError("User doesn't exist", 404));
   }

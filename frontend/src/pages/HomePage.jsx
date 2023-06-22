@@ -34,8 +34,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    dispatch(getAllPlacesAsync({ page, city }));
+    // eslint-disable-next-line
+  }, [city]);
+
+  useEffect(() => {
     console.log("useEffect called.....", page);
-    dispatch(getAllPlacesAsync({ page }));
+    dispatch(getAllPlacesAsync({ page, city: "" }));
     // eslint-disable-next-line
   }, [page]);
 
@@ -48,7 +53,7 @@ const HomePage = () => {
     <div>
       <Filters />
       <div className="flex justify-center">
-        <div className="mt-4 w-[100vh]">
+        <div className="mt-4 -mb-4 w-[100vh] border-primary">
           <input
             type="text"
             placeholder="search for city"

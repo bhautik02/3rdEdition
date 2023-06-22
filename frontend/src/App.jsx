@@ -22,13 +22,11 @@ import Places from "./components/Dashboard/Places";
 import LayoutDash from "./components/Dashboard/LayoutDash";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import Users from "./components/Dashboard/Users";
-import Analytics from "./components/Dashboard/Analytics";
 
 axios.defaults.baseURL = "http://localhost:5000/api/v1/";
 
 const PlacesDash = LayoutDash(Places);
 const UsersDash = LayoutDash(Users);
-const AnalyticsDash = LayoutDash(Analytics);
 // const UserJobsHistoryHOC = LayoutDash(UserJobsHistory);
 // const UserInfoDashboardHOC = LayoutDash(UserInfoDashboard);
 
@@ -58,13 +56,12 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
-          {console.log("fromApp", user)}
+          {/* {console.log("fromApp", user)} */}
 
           {user && user.isAdmin ? (
             <Route>
-              <Route path="/" element={<AnalyticsDash />}></Route>
+              <Route path="/" element={<PlacesDash />}></Route>
               <Route path="/users" element={<UsersDash />}></Route>
-              <Route path="/places" element={<PlacesDash />}></Route>
             </Route>
           ) : (
             <Route path="/" element={<Layout />}>
