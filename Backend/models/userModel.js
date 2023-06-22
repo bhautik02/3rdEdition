@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter password"],
       minlength: [6, "Password must be of minimum 6 characters"],
       select: false,
+      validate: [validator.isStrongPassword, "Please Enter Strong Password."],
     },
     address: {
       type: String,
@@ -74,7 +75,7 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 userSchema.methods.generateToken = function () {
   return jwt.sign({ id: this._id, email: this.email }, process.env.JWT_SECRET, {
-    expiresIn: 30000000000000000,
+    expiresIn: 300000000,
   });
 };
 
