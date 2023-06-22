@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PhotoGallery from "../components/PhotoGallery";
 import AddressLink from "../components/AddressLink";
 import BookingWidget from "../components/BookingWidget";

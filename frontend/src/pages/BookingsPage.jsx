@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import ReviewDialogBox from "../components/ReviewDialogBox";
 import { getAllbookingAsync } from "../store/booking";
 import LoadingSpinner from "../utils/LoadingSpinner";
@@ -40,8 +39,7 @@ const BookingsPage = () => {
             allBookings.map((booking) => (
               <div
                 className="shadow-2xl shadow-black-300  m-10 -mb-4"
-                key={booking._id}
-              >
+                key={booking._id}>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-1 bg-lightblue p-8 pt-6">
                     <div>

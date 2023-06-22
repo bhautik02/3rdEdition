@@ -14,7 +14,6 @@ import { useEffect } from "react";
 import {
   deletePlaceDashAsync,
   getAllPlacesDashAsync,
-  getAllUsersAsync,
 } from "../../store/dashboard";
 import { AiTwotoneStar } from "react-icons/ai";
 

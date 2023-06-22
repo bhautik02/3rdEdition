@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import { differenceInCalendarDays } from "date-fns";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import MyDatePicker from "./DatePicker";
 import { bookPlaceAsync } from "../store/booking";
 import datesBetween from "dates-between";
 import axios from "axios";
-import { red } from "@mui/material/colors";
 
 export default function BookingWidget({ place }) {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [name, setName] = useState("");
-  const [redirect, setRedirect] = useState(false);
 
   const user = useSelector((state) => state.user.user);
 
@@ -134,9 +132,6 @@ export default function BookingWidget({ place }) {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  if (redirect) {
   }
 
   return (

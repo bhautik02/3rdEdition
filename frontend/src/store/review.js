@@ -9,7 +9,7 @@ export const createReviewAsync = createAsyncThunk(
       console.log("formData-------->", reviewFormData);
       const { name, place, user, profile, rating, review, bookingID } =
         reviewFormData;
-      const response = await axios.post(`review/reviews/${bookingID}`, {
+      await axios.post(`review/reviews/${bookingID}`, {
         name,
         place,
         user,
@@ -17,7 +17,6 @@ export const createReviewAsync = createAsyncThunk(
         profile,
         review,
       });
-      const reviewRes = response.data.review;
       toast.success("review added");
       return review;
     } catch (error) {

@@ -13,12 +13,7 @@ import {
   FaUmbrellaBeach,
   FaWarehouse,
 } from "react-icons/fa";
-import {
-  MdOutlineApartment,
-  MdOutlineCabin,
-  MdPool,
-  MdHome,
-} from "react-icons/md";
+import { MdOutlineCabin, MdPool, MdHome } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { getAllPlacesAsync } from "../store/place";
 

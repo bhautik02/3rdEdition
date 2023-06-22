@@ -9,7 +9,6 @@ import {
   getAllHostedPlacesByUserAsync,
 } from "../../store/addPlace";
 import DataNotFound from "../DataNotFound";
-import LoadingSpinner from "../../utils/LoadingSpinner";
 
 const style = {
   position: "absolute",
@@ -66,8 +65,7 @@ const MyPlaces = (props) => {
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
+          aria-describedby="modal-modal-description">
           <Box sx={style}>
             <div className="flex justify-center ">
               {editingPlaceInfo ? (
@@ -89,8 +87,7 @@ const MyPlaces = (props) => {
         <button
           to="addPlaces"
           className="inline-flex gap-1  py-1 px-4 bg-primary rounded-full text-white"
-          onClick={handleOpen}
-        >
+          onClick={handleOpen}>
           <PlusSvg />
           Add Place
         </button>
@@ -107,8 +104,7 @@ const MyPlaces = (props) => {
                     <div key={place?._id}>
                       <Link
                         className="col-span-1 cursor-pointer group"
-                        onClick={editHandleOpen.bind(null, place)}
-                      >
+                        onClick={editHandleOpen.bind(null, place)}>
                         <div className="flex flex-col gap-2 w-full">
                           <div className="aspect-square w-full relative overflow-hidden rounded-xl ">
                             <img
@@ -135,8 +131,7 @@ const MyPlaces = (props) => {
                           {console.log("idddddd", place)}
                           <button
                             className="bg-primary text-white px-4 py-1 rounded-md"
-                            onClick={deletePlaceHandler.bind(null, place?._id)}
-                          >
+                            onClick={deletePlaceHandler.bind(null, place?._id)}>
                             Delete
                           </button>
                         </div>

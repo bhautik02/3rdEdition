@@ -34,7 +34,6 @@ export const fetchUserAsync = createAsyncThunk("user/fetchUser", async () => {
     const user = response.data.user;
     return user;
   } catch (error) {
-    toast.error(error.response.data.message);
     return;
   }
 });
@@ -143,7 +142,6 @@ const userSlice = createSlice({
       .addCase(fetchUserAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-        // toast.error("bsjfbjasb");
       })
       .addCase(userLoginAsync.pending, (state) => {
         state.loading = true;
@@ -191,4 +189,3 @@ const userSlice = createSlice({
 
 export const userActions = userSlice.actions;
 export default userSlice.reducer;
-// Toastify__progress-bar-theme--dark

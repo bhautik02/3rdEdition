@@ -1,5 +1,5 @@
 import LoadingSpinner from "../utils/LoadingSpinner";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import MyAccount from "./ProfilePage";
 import UserSvg from "../utils/svg/UserSvg";
 import ReservationSvg from "../utils/svg/ReservationSvg";

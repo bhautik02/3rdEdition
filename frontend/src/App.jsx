@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import Layout from "./components/Layout";
@@ -23,21 +23,20 @@ import LayoutDash from "./components/Dashboard/LayoutDash";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import Users from "./components/Dashboard/Users";
 
-axios.defaults.baseURL = "http://localhost:5000/api/v1/";
+axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
 
 const PlacesDash = LayoutDash(Places);
 const UsersDash = LayoutDash(Users);
-// const UserJobsHistoryHOC = LayoutDash(UserJobsHistory);
-// const UserInfoDashboardHOC = LayoutDash(UserInfoDashboard);
 
 function App() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("EFFECT CALLED---------------->", user);
     try {
       if (!user) {
+        console.log("EFFECT CALLED IF---------------->", user);
         dispatch(fetchUserAsync());
       }
     } catch (error) {}
@@ -51,7 +50,6 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
-          {/* {console.log("fromApp", user)} */}
 
           {user && user.isAdmin ? (
             <Route>

@@ -42,8 +42,7 @@ export const deleteUserDashAsync = createAsyncThunk(
   "dash/deleteUserDash",
   async (userId) => {
     try {
-      const response = await axios.patch(`admin/users/${userId}`);
-      // const deletedHostedPlace = response.data.deletedHostedPlace;
+      await axios.patch(`admin/users/${userId}`);
       toast.success("User Blocked Successfully.");
       return userId;
     } catch (error) {
@@ -56,8 +55,7 @@ export const deletePlaceDashAsync = createAsyncThunk(
   "dash/deletePlaceDash",
   async (placeId) => {
     try {
-      const response = await axios.patch(`admin/places/${placeId}`);
-      // const deletedHostedPlace = response.data.deletedHostedPlace;
+      await axios.patch(`admin/places/${placeId}`);
       toast.success("Place Blocked Successfully.");
       return placeId;
     } catch (error) {

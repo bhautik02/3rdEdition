@@ -2,9 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,16 +58,14 @@ const ProfileForm = () => {
             color: "white",
             border: "none",
           },
-        }}
-      >
+        }}>
         Update me
       </Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <DialogTitle className="flex justify-center">
           {"Update Your Profile"}
         </DialogTitle>
@@ -102,8 +98,7 @@ const ProfileForm = () => {
                 <select
                   required
                   value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                >
+                  onChange={(e) => setGender(e.target.value)}>
                   <option value="">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -126,14 +121,12 @@ const ProfileForm = () => {
               <div className="flex justify-end mt-4 gap-4">
                 <button
                   onClick={handleClose}
-                  className="bg-grey rounded-lg px-4 py-2"
-                >
+                  className="bg-grey rounded-lg px-4 py-2">
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-primary text-white rounded-lg px-4 py-2 "
-                >
+                  className="bg-primary text-white rounded-lg px-4 py-2 ">
                   Submit
                 </button>
               </div>

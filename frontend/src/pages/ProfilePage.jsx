@@ -1,8 +1,6 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userUpdateAsync } from "../store/user";
-import { AiTwotoneStar } from "react-icons/ai";
 import { GiGlobe } from "react-icons/gi";
 import ProfileForm from "../components/ProfileForm";
 import storage from "../utils/firebaseStorage";
