@@ -49,12 +49,7 @@ const Filters = () => {
         </div>
         Amazing Pool
       </NavLink>
-      <NavLink onClick={filterByCategory.bind(null, "apartment")}>
-        <div className="flex justify-center">
-          <MdOutlineApartment className="w-8 h-8" />
-        </div>
-        Apartment
-      </NavLink>
+
       <NavLink onClick={filterByCategory.bind(null, "campingsite")}>
         <div className="flex justify-center">
           <GiCampingTent className="w-8 h-8" />

@@ -89,12 +89,10 @@ const FirstStep = forwardRef((props, ref) => {
           select={category}
           value={category}
           onChange={(event) => setCategory(event.target.value)}
-          className="w-full h-10 rounded-2xl bg-white pl-4 border-gray-200"
-        >
+          className="w-full h-10 rounded-2xl bg-white pl-4 border-gray-200">
           <option value="">Select</option>
           <option value="beachview">Beach View</option>
           <option value="amazingpool">Amazing Pool</option>
-          <option value="apartment">Apartment</option>
           <option value="campingsite">Camping Site</option>
           <option value="cabin">Cabin</option>
           <option value="historicalhomes">Historical Homes</option>
