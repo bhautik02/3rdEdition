@@ -19,7 +19,7 @@ const handleDuplicateFieldsDB = (err) => {
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
 
-  const message = `Invalid input data. ${errors.join(". ")}`;
+  const message = `${errors.join(". ")}`;
   return new AppError(message, 400);
 };
 
@@ -38,7 +38,6 @@ const sendErrorProd = (err, req, res) => {
   }
 
   console.error("ERROR 💥", err);
-  // 2) Send generic message
   return res.status(err.statusCode).json({
     title: "Something went wrong!",
     msg: "Please try again later.",
@@ -53,5 +52,4 @@ module.exports = (error, req, res, next) => {
   if (error.name === "TokenExpiredError") error = handleJWTExpiredError();
 
   sendErrorProd(error, req, res);
-  //   }
 };

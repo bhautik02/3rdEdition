@@ -83,8 +83,7 @@ export const deletePlaceAsync = createAsyncThunk(
   "addPlace/deletePlace",
   async (placeId) => {
     try {
-      const response = await axios.patch(`place/deletePlace/${placeId}`);
-      // const deletedHostedPlace = response.data.deletedHostedPlace;
+      await axios.patch(`place/deletePlace/${placeId}`);
       toast.success("Hosted Place deleted Successfully.");
       return placeId;
     } catch (error) {

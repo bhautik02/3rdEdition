@@ -2,6 +2,7 @@ const Booking = require("../models/bookingModel");
 const CatchAsync = require("../utils/CatchAsync");
 const AppError = require("../utils/appError");
 
+//get all reservations
 const getReservations = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
   const page = req.query.page * 1 || 1;

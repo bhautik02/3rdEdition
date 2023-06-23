@@ -3,6 +3,7 @@ const Place = require("../models/placeModel");
 const CatchAsync = require("../utils/CatchAsync");
 const AppError = require("../utils/appError");
 
+//to get all users for admin dashboard
 const getAllUsers = CatchAsync(async (req, res, next) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 10;
@@ -32,6 +33,7 @@ const getAllUsers = CatchAsync(async (req, res, next) => {
   });
 });
 
+//to get all places for admin dashboard
 const getAllPlaces = CatchAsync(async (req, res, next) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 10;
@@ -66,6 +68,7 @@ const getAllPlaces = CatchAsync(async (req, res, next) => {
   });
 });
 
+//to delete user for admin dashboard
 const deleteUserDash = CatchAsync(async (req, res, next) => {
   const userId = req.params.id;
   console.log(userId);
@@ -78,7 +81,7 @@ const deleteUserDash = CatchAsync(async (req, res, next) => {
     }
   );
 
-  console.log(deletedUser);
+  // console.log(deletedUser);
   if (!deletedUser) {
     return next(new AppError("Place not deleted!", 404));
   }
@@ -86,6 +89,7 @@ const deleteUserDash = CatchAsync(async (req, res, next) => {
   res.status(204).json(null);
 });
 
+//to delete place for admin dashboard
 const deletePlaceDash = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
   console.log(placeId);
@@ -98,7 +102,7 @@ const deletePlaceDash = CatchAsync(async (req, res, next) => {
     }
   );
 
-  console.log(deletedPlace);
+  // console.log(deletedPlace);
   if (!deletedPlace) {
     return next(new AppError("Place not deleted!", 404));
   }

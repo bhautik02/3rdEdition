@@ -32,9 +32,9 @@ const ThirdStep = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const [ready, setReady] = useState(false);
 
-  const [numberOFBedrooms, setNumberOfBedrooms] = useState(0);
-  const [numberOFBathrooms, setNumberOfBathrooms] = useState(0);
-  const [numberOFGuest, setNumberOfGuest] = useState(0);
+  const [numberOFBedrooms, setNumberOfBedrooms] = useState(1);
+  const [numberOFBathrooms, setNumberOfBathrooms] = useState(1);
+  const [numberOFGuest, setNumberOfGuest] = useState(1);
   const [price, setPrice] = useState(100);
   const [checkInTime, setCheckInTime] = useState(0);
   const [CheckOutTime, setCheckOutTime] = useState(0);

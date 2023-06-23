@@ -7,6 +7,7 @@ var instance = new Razorpay({
   key_secret: process.env.RAZORPAY_API_SECRET,
 });
 
+//to make a payment
 const checkout = CatchAsync(async (req, res, next) => {
   const { amount } = req.body;
   const options = {
@@ -26,6 +27,7 @@ const checkout = CatchAsync(async (req, res, next) => {
   });
 });
 
+//to verify a payment
 const verify = CatchAsync(async (req, res, next) => {
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
     req.body;

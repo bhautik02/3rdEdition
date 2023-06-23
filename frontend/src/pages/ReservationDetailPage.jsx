@@ -111,7 +111,7 @@ export default function ReservationDetailPage() {
                         {reservation.checkOut.split("T")[0]}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {reservation.price}
+                        {reservation.price} ₹
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}

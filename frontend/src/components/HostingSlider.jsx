@@ -19,10 +19,6 @@ export default function HostingSlider(props) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
-  // const [close, setClose] = React.useState(false);
-
-  // const [disabled, setDisabled] = React.useState(data ? false : true);
-
   const totalSteps = () => {
     return steps.length;
   };
@@ -79,12 +75,6 @@ export default function HostingSlider(props) {
     [addPlace]
   );
 
-  // React.useEffect(() => {
-  //   if (activeStep === 2) {
-  //     console.log("fromslider", addPlace);
-  //   }
-  // }, []);
-
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper nonLinear activeStep={activeStep}>
@@ -99,8 +89,7 @@ export default function HostingSlider(props) {
               "& .MuiStepLabel-root .Mui-active": {
                 color: "black",
               },
-            }}
-          >
+            }}>
             <StepButton color="inherit" onClick={handleStep(index)}>
               {label}
             </StepButton>
@@ -125,8 +114,7 @@ export default function HostingSlider(props) {
                       bgcolor: "#F5385D",
                       color: "white",
                     },
-                  }}
-                >
+                  }}>
                   Close
                 </Button>
               </div>
@@ -136,8 +124,7 @@ export default function HostingSlider(props) {
                 display: "flex",
                 flexDirection: "row",
                 pt: 2,
-              }}
-            >
+              }}>
               <Box sx={{ flex: "1 1 auto" }} />
             </Box>
           </React.Fragment>
@@ -175,8 +162,7 @@ export default function HostingSlider(props) {
                 (completed[activeStep] ? (
                   <Typography
                     variant="caption"
-                    sx={{ display: "flex", alignItems: "center" }}
-                  >
+                    sx={{ display: "flex", alignItems: "center" }}>
                     Step {activeStep + 1} already completed
                   </Typography>
                 ) : (
@@ -188,8 +174,7 @@ export default function HostingSlider(props) {
                         bgcolor: "#F5385D",
                         color: "white",
                       },
-                    }}
-                  >
+                    }}>
                     {completedSteps() === totalSteps() - 1 ? "Finish" : "NEXT"}
                   </Button>
                 ))}

@@ -2,6 +2,7 @@ const Place = require("../models/placeModel");
 const CatchAsync = require("../utils/CatchAsync");
 const AppError = require("../utils/appError");
 
+//get place details for placepage
 const getPlace = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
   const place = await Place.findById(placeId)
@@ -24,6 +25,7 @@ const getPlace = CatchAsync(async (req, res, next) => {
   });
 });
 
+//get all your hosted places
 const getYourHostedPlace = CatchAsync(async (req, res, next) => {
   const ownerId = req.params.id;
   const hostedPlace = await Place.find({
@@ -44,6 +46,7 @@ const getYourHostedPlace = CatchAsync(async (req, res, next) => {
   });
 });
 
+//get all places for hoepage
 const getAllHostedplaces = CatchAsync(async (req, res, next) => {
   let category = req.body.category;
   let search = req.query.search;
@@ -64,10 +67,7 @@ const getAllHostedplaces = CatchAsync(async (req, res, next) => {
   const hostedPlace = await Place.find(obj)
     .skip(skip)
     .limit(limit)
-    .select("-__v")
-    .sort({
-      createdAt: -1,
-    });
+    .select("-__v");
 
   if (!hostedPlace) {
     return next(new AppError("Places not found!", 404));
@@ -81,6 +81,7 @@ const getAllHostedplaces = CatchAsync(async (req, res, next) => {
   });
 });
 
+//create a place
 const hostPlace = CatchAsync(async (req, res, next) => {
   const {
     title,
@@ -126,6 +127,7 @@ const hostPlace = CatchAsync(async (req, res, next) => {
   });
 });
 
+//update hostedplace
 const updateHostedData = CatchAsync(async (req, res, next) => {
   const {
     title,
@@ -174,6 +176,7 @@ const updateHostedData = CatchAsync(async (req, res, next) => {
   });
 });
 
+//delete hostedplace
 const deleteHostedData = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
   console.log(placeId);

@@ -37,7 +37,7 @@ export default function MyDatePicker({ setDate }) {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
-          label="Basic date picker"
+          label="MM/DD/YYYY"
           disablePast
           maxDate={dayjs(daysss.$d)}
           shouldDisableDate={shouldDisable}

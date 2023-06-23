@@ -44,8 +44,6 @@ const userSchema = new mongoose.Schema(
       default:
         "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png",
     },
-    resetPasswordToken: String,
-    resetPasswordExpiry: Date,
     isDeleted: {
       type: Boolean,
       default: false,
@@ -62,6 +60,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+//hashung the password before saving it in databse for security reason
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
@@ -69,26 +68,16 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+//verify hashpassword with user entered password
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+//generates token for auth
 userSchema.methods.generateToken = function () {
   return jwt.sign({ id: this._id, email: this.email }, process.env.JWT_SECRET, {
-    expiresIn: 300000000,
+    expiresIn: 24 * 60 * 60 * 1000,
   });
-};
-
-userSchema.methods.getResetPasswordToken = async function () {
-  const resetToken = crypto.randomBytes(20).toString("hex");
-
-  this.resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-  this.resetPasswordExpiry = Date.now() + 15 * 60 * 1000;
-
-  return resetToken;
 };
 
 module.exports = mongoose.model("User", userSchema);

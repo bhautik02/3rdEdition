@@ -10,13 +10,12 @@ const Footer = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Box component="span" sx={{ color: "black" }}>
           <hr className="w-screen" />
           <div className="flex justify-center mt-4">
             {" "}
-            All rights reserved! 2023.
+            &copy; All rights reserved! 2023.
           </div>
         </Box>
       </Box>

@@ -5,14 +5,16 @@ const jwt = require("jsonwebtoken");
 const CatchAsync = require("./../utils/CatchAsync");
 const AppError = require("../utils/appError");
 
+//for user signing up
 const signupUser = CatchAsync(async (req, res, next) => {
   const { name, email, password } = req.body;
+
+  //it will check for password not caintain any space in between
   if (password.includes(" ")) {
     return next(
       new AppError(
         "You can not enter space as a password, Change your password!!!",
-        //Unprocessable Entity
-        422
+        403
       )
     );
   }
@@ -23,19 +25,22 @@ const signupUser = CatchAsync(async (req, res, next) => {
     password,
   });
 
+  //for sending user registration mail
   await sendEmail({
     email: newUser.email,
     name: newUser.name,
     subject: "Thank you for Signing Up",
   });
 
+  //it  will send the user along with cookie
   sendCookie(newUser, 201, res);
-  // res.status(200).json("jkdnjkdn");
 });
 
+//for login user
 const loginUser = CatchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
+  //it check that email is valid that have been provided by user
   let user = await User.findOne({ email, isDeleted: false }).select(
     "+password"
   );
@@ -43,6 +48,7 @@ const loginUser = CatchAsync(async (req, res, next) => {
     return next(new AppError("User doesn't exist", 404));
   }
 
+  //it matched entered password with database's hash password
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
     return next(new AppError("Password doesn't match", 401));
@@ -51,12 +57,14 @@ const loginUser = CatchAsync(async (req, res, next) => {
   sendCookie(user, 201, res);
 });
 
+//for logout user
 const logoutUser = CatchAsync(async (req, res, next) => {
   res.status(200).clearCookie("token").json({
     status: "success",
   });
 });
 
+//for authenticate user
 const profile = CatchAsync(async (req, res, next) => {
   const { token } = req.cookies;
 
@@ -64,6 +72,7 @@ const profile = CatchAsync(async (req, res, next) => {
     return next(new AppError("Please Login to Access", 401));
   }
 
+  //verify user token that user has valid token log in
   jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
     if (err) {
       return next(new AppError("Please Login to Access", 401));
@@ -84,6 +93,7 @@ const profile = CatchAsync(async (req, res, next) => {
   });
 });
 
+//update user details
 const updateUserDetails = CatchAsync(async (req, res, next) => {
   const { address, gender, aboutMe, phone, profile } = req.body;
   console.log(aboutMe);

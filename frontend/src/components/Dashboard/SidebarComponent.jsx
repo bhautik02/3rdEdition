@@ -89,24 +89,17 @@ const SidebarComponent = () => {
                   [`&.${menuClasses.button}`]: {
                     color: "#fafafa",
                   },
-
-                  // "&:hover": {
-                  //   backgroundColor: "rgba(23,105,170, 1)",
-                  //   color: "#fafafa",
-                  // },
                 },
 
                 icon: {
                   [`&.${menuClasses.icon}`]: {
-                    // color: "blue",
                     color: "black",
                   },
                 },
               }}>
               <MenuItem icon={<LoginIcon />}>
                 <div style={{ color: "black" }} onClick={logoutHandler}>
-                  {" "}
-                  Logout{" "}
+                  Logout
                 </div>
               </MenuItem>
             </Menu>

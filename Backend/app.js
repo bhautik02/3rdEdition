@@ -2,9 +2,6 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const morgan = require("morgan");
-
-const app = express();
-
 const user = require("./routes/userRoutes");
 const place = require("./routes/placeRoute");
 const booking = require("./routes/bookingRoute");
@@ -14,10 +11,12 @@ const errorController = require("./controller/errorController");
 const payment = require("./routes/paymentRoute");
 const admin = require("./routes/dashboardRoute");
 
+const app = express();
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/public", express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.use(

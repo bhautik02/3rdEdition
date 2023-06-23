@@ -4,6 +4,7 @@ const Review = require("../models/reviewModel");
 const CatchAsync = require("../utils/CatchAsync");
 const AppError = require("../utils/appError");
 
+//create a review for booked place
 const createReview = CatchAsync(async (req, res, next) => {
   const bookingId = req.params.id;
   const { place, user, name, profile, rating, review } = req.body;
@@ -46,6 +47,7 @@ const createReview = CatchAsync(async (req, res, next) => {
   });
 });
 
+//get all reviews for particular place
 const getReviews = CatchAsync(async (req, res, next) => {
   const placeId = req.params.id;
   const reviews = await Review.find({ place: placeId, isDeleted: false });

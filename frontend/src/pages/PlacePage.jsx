@@ -85,7 +85,7 @@ const PlacePage = () => {
                   <img
                     src={placeData?.host[0].profile}
                     alt=""
-                    className="w-14 h-14 absolute  top-3 end-0 border-grey-800 rounded-full bg-gray-200"
+                    className="w-14 h-14 absolute object-cover top-3 end-0 border-grey-800 rounded-full bg-gray-200"
                   />
                 </div>
                 <hr className="mt-5 " />
@@ -146,7 +146,7 @@ const PlacePage = () => {
                       {reviews.map((review, index) => {
                         return (
                           <div className="">
-                            <div className="flex mt-10 gap-4">
+                            <div className="flex mt-10 object-cover gap-4">
                               <img
                                 src={review?.profile}
                                 alt=""
@@ -183,7 +183,7 @@ const PlacePage = () => {
                   <img
                     src={placeData?.host[0].profile}
                     alt=""
-                    className="  w-14 h-14  top-0 left-0 rounded-full bg-red-500"
+                    className="  w-14 h-14  top-0 left-0 rounded-full object-cover bg-red-500"
                   />
                   <div>
                     <h1 className="font-medium text-2xl">

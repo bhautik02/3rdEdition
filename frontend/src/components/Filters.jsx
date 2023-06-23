@@ -16,8 +16,10 @@ import {
 import { MdOutlineCabin, MdPool, MdHome } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { getAllPlacesAsync } from "../store/place";
+import { useState } from "react";
 
 const Filters = () => {
+  // const [page, setpage] = useState();
   const dispatch = useDispatch();
 
   const filterByCategory = (category) => {

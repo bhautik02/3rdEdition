@@ -3,7 +3,7 @@ import PlusSvg from "../../utils/svg/PlusSvg";
 import { useEffect, useState } from "react";
 import HostingSlider from "../HostingSlider";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   deletePlaceAsync,
   getAllHostedPlacesByUserAsync,
@@ -22,11 +22,10 @@ const style = {
   p: 4,
 };
 
-const MyPlaces = (props) => {
+const MyPlaces = () => {
   const user = useSelector((state) => state.user.user);
   const hostedData = useSelector((state) => state.addPlace.yourHostedPlaces);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const [editingPlaceInfo, setEditingPlaceInfo] = useState();

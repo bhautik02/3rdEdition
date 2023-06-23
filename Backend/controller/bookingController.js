@@ -4,6 +4,7 @@ const Place = require("../models/placeModel");
 const CatchAsync = require("../utils/CatchAsync");
 const AppError = require("../utils/appError");
 
+//for book a place
 const bookPlace = CatchAsync(async (req, res, next) => {
   const {
     checkIn,
@@ -64,6 +65,7 @@ const bookPlace = CatchAsync(async (req, res, next) => {
   });
 });
 
+//all user bookings
 const getBookings = CatchAsync(async (req, res, next) => {
   const userId = req.params.id;
   const bookings = await Booking.find({

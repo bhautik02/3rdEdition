@@ -1,4 +1,3 @@
-// // AIzaSyDwIVgIMPOY0UMpmXrqO0hOBNSTM7dH2pA
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPlacesAsync } from "../store/place";
 import { useEffect, useState } from "react";
@@ -35,7 +34,6 @@ const HomePage = () => {
   }, [debouncedValue]);
 
   useEffect(() => {
-    console.log("useEffect called.....", page);
     dispatch(getAllPlacesAsync({ page, city: "" }));
     // eslint-disable-next-line
   }, [page]);

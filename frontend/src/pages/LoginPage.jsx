@@ -24,7 +24,7 @@ const LoginPage = () => {
     dispatch(userLoginAsync({ email, password }));
     setEmail("");
     setPassword("");
-    navigate("/");
+    navigate(-1);
   };
 
   return (

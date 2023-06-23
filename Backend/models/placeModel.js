@@ -75,12 +75,14 @@ const placeSchema = mongoose.Schema(
   }
 );
 
+//virtual field of hostData
 placeSchema.virtual("host", {
   ref: "User",
   foreignField: "_id",
   localField: "owner",
 });
 
+//virtual field of reviews that place got
 placeSchema.virtual("reviews", {
   ref: "Review",
   foreignField: "place",
