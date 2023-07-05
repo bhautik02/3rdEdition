@@ -51,7 +51,6 @@ const getAllHostedplaces = CatchAsync(async (req, res, next) => {
   let category = req.body.category;
   let search = req.query.search;
   let obj = category ? { isDeleted: false, category } : { isDeleted: false };
-
   if (search) {
     obj = { ...obj, address: { $regex: search, $options: "i" } };
   }
