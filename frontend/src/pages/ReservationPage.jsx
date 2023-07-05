@@ -27,7 +27,7 @@ const ReservationPages = () => {
         My Reservations
       </p>
 
-      {hostedData ? (
+      {hostedData?.length > 0 ? (
         <div className="mx-auto mt-4 md:px-10 sm:px-2 px-4 xsm:ml-20px ">
           <div className=" grid  grid-cols-1  sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 gap-8 ">
             {hostedData.map((place) => {

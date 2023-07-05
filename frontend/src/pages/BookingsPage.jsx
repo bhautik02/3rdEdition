@@ -35,8 +35,9 @@ const BookingsPage = () => {
       </p>
       <div className="flex gap-10 justify-center items-center">
         <div className="w-5/12">
+          {/* console.log(allB); */}
           {allBookings &&
-            allBookings.map((booking) => (
+            allBookings?.map((booking) => (
               <div
                 className="shadow-2xl shadow-black-300  m-10 -mb-4"
                 key={booking._id}>

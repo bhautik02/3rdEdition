@@ -75,6 +75,8 @@ const placeSchema = mongoose.Schema(
   }
 );
 
+placeSchema.index({ address: 1 });
+
 //virtual field of hostData
 placeSchema.virtual("host", {
   ref: "User",

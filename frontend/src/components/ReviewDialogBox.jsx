@@ -51,8 +51,7 @@ export default function ReviewDialogBox({ bookingData, userData }) {
       <button
         variant="outlined"
         onClick={handleClickOpen}
-        className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base"
-      >
+        className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base">
         Review it
       </button>
       {console.log("snvlksdnvknv", userData)}
@@ -60,8 +59,7 @@ export default function ReviewDialogBox({ bookingData, userData }) {
         open={open}
         onClose={handleClose}
         aria-labelledby="review-dialog-title"
-        aria-describedby="review-dialog-description"
-      >
+        aria-describedby="review-dialog-description">
         <DialogTitle id="review-dialog-title" className="flex justify-center">
           {"Review Your Trip"}
         </DialogTitle>
@@ -92,15 +90,13 @@ export default function ReviewDialogBox({ bookingData, userData }) {
               <div className="flex gap-2 justify-end">
                 <button
                   onClick={handleClose}
-                  className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base"
-                >
+                  className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base">
                   cancel
                 </button>
                 <button
                   type="submit"
                   autoFocus
-                  className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base"
-                >
+                  className="px-4 py-2 bg-gray-200 rounded-md outline-black text-base">
                   Submit
                 </button>
               </div>
@@ -110,17 +106,4 @@ export default function ReviewDialogBox({ bookingData, userData }) {
       </Dialog>
     </div>
   );
-}
-{
-  /* <button
-onClick={handleClose}
-className="bg-grey rounded-lg px-4 py-2">
-Cancel
-</button>
-<button
-onClick={handleClose}
-type="submit"
-className="bg-primary text-white rounded-lg px-4 py-2 ">
-Submit
-</button> */
 }

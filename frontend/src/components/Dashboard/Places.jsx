@@ -61,7 +61,7 @@ export default function Places() {
   useEffect(() => {
     dispatch(getAllPlacesDashAsync({ page, rowsPerPage }));
     // eslint-disable-next-line
-  }, [page, rowsPerPage]);
+  });
 
   return (
     <>

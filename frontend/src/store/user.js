@@ -34,7 +34,8 @@ export const fetchUserAsync = createAsyncThunk("user/fetchUser", async () => {
     const user = response.data.user;
     return user;
   } catch (error) {
-    return;
+    console.log("fetcherror", error);
+    return null;
   }
 });
 
@@ -141,7 +142,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchUserAsync.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
       })
       .addCase(userLoginAsync.pending, (state) => {
         state.loading = true;

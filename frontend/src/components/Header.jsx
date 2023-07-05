@@ -61,13 +61,11 @@ function Header() {
             color: "black",
             boxShadow: "none",
             // marginLeft: "5px",
-          }}
-        >
+          }}>
           <Container maxWidth="xl">
             <Toolbar
               disableGutters
-              sx={{ marginLeft: "-135px", marginRight: "-135px" }}
-            >
+              sx={{ marginLeft: "-135px", marginRight: "-135px" }}>
               <div className="mr-4">
                 <SiGooglehome />
               </div>
@@ -84,8 +82,7 @@ function Header() {
                   // letterSpacing: ".3rem",
                   color: "inherit",
                   textDecoration: "none",
-                }}
-              >
+                }}>
                 FeelsHome
               </Typography>
 
@@ -96,8 +93,7 @@ function Header() {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
+                  color="inherit">
                   <MenuIcon />
                 </IconButton>
                 <Menu
@@ -116,8 +112,7 @@ function Header() {
                   onClose={handleCloseNavMenu}
                   sx={{
                     display: { xs: "block", md: "none" },
-                  }}
-                >
+                  }}>
                   {pages.map((page) => (
                     <div key={Math.random()}>
                       <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -129,12 +124,12 @@ function Header() {
               </Box>
 
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                {console.log("header", user)}
                 {pages.map((page) => (
                   <NavLink
                     to={user ? `/${page.toLowerCase()}` : "/login"}
                     key={page}
-                    className={activeClassName}
-                  >
+                    className={activeClassName}>
                     <Button
                       key={page}
                       onClick={handleCloseNavMenu}
@@ -143,8 +138,7 @@ function Header() {
                         color: "black",
                         display: "block",
                         mx: "10px",
-                      }}
-                    >
+                      }}>
                       {page}
                     </Button>
                   </NavLink>
@@ -159,8 +153,7 @@ function Header() {
                     textAlign: "center",
                     margin: "10px",
                     fontSize: "16px",
-                  }}
-                >
+                  }}>
                   {user?.name}
                   {console.log("ftyguhijo", user)}
                 </Typography>
@@ -185,8 +178,7 @@ function Header() {
                     horizontal: "right",
                   }}
                   open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
+                  onClose={handleCloseUserMenu}>
                   {user ? (
                     <MenuItem onClick={logoutHandler} key={Math.random()}>
                       <Typography textAlign="center">Logout</Typography>
@@ -195,8 +187,7 @@ function Header() {
                     <Link to={`/login`}>
                       <MenuItem
                         onClick={handleCloseUserMenu}
-                        key={Math.random()}
-                      >
+                        key={Math.random()}>
                         <Typography textAlign="center">Login</Typography>
                       </MenuItem>
                     </Link>

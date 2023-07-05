@@ -77,8 +77,6 @@ export default function ProfilePage() {
         <div className="text-2xl font-bold mt-6">Email</div>
 
         <div className="text-gray-800">{user?.email}</div>
-        {/* <div className="text-2xl font-bold mt-6">Address</div>
-        <div className="">{user?.address}surat, gujrat, India</div> */}
         <div className="text-2xl font-bold mt-6">Gender</div>
         <div className="text-gray-800">{user?.gender}</div>
         <div className="text-2xl font-bold mt-6">Phone</div>

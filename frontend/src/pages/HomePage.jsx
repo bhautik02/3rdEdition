@@ -55,7 +55,6 @@ const HomePage = () => {
             onChange={searchHandler}></input>
         </div>
       </div>
-      {/* {console.log("grojgj", allplaces)} */}
       {!allplaces || allplaces.length === 0 ? (
         <DataNotFound />
       ) : (
